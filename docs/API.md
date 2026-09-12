@@ -5,6 +5,8 @@
 1. **REST API** (برای پلاگین ماینکرافت و هر کلاینت خارجی)
 2. **AJAX داخلی** (برای اسکریپت‌های سمت کاربر سایت)
 3. **مسیرهای سازگار با نسخهٔ قدیمی** (`storelinkformc/v1`)
+4. **توابع عمومی PHP و شورت‌کدها** (برای قالب و صفحه‌سازها)
+5. **ویجت‌های المنتور** (۱۱ ویجت برای طراحی صفحهٔ حساب کاربری)
 
 ---
 
@@ -40,7 +42,7 @@ https://yoursite.com/wp-json/bazzarmc/v1
 {
   "success": true,
   "plugin": "BazzarMc",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "time": "2026-09-12 10:24:33",
   "site": "فروشگاه ماینکرافت من",
   "verify": [ "dashboard", "email" ]
@@ -261,7 +263,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
   ],
   "ranks": [ { "key": "vip", "name": "رتبهٔ VIP", "level": 1, "role": "vip", "days": 30 } ],
   "status": { "enabled": true, "hide_lower": true, "definitions": 3, "manual": 2, "synced_at": 1788000000, "reported_at": 1788003600 },
-  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.2.0" }
+  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.3.0" }
 }
 ```
 
@@ -507,3 +509,56 @@ api.redeemCode(player.getName(), uuid, "7KQ2M9")
 | `3` | منقضی (expired) |
 
 زمان انقضا از تنظیم «انقضای تحویل» در تب **محصولات** می‌آید و زمان‌بند ساعتی (`bmc_hourly_maintenance`) ردیف‌های قدیمی را منقضی می‌کند.
+
+---
+
+## ۸) توابع عمومی PHP و شورت‌کدها (سمت کاربر سایت)
+
+همهٔ این توابع رشتهٔ HTML برمی‌گردانند (چاپ نمی‌کنند) و دارایی‌های لازم را خودکار بارگذاری می‌کنند:
+
+| تابع | خروجی | شورت‌کد معادل |
+|---|---|---|
+| `BMC_Public::shortcode_account( $atts )` | پنل اتصال اکانت ماینکرافت (کد ۵ دقیقه‌ای + تأیید) | `[bazzarmc]` / `[bazzarmc_account]` / `[bazzarmc_link]` |
+| `BMC_Public::shortcode_status()` | نشان وضعیت اتصال | `[bazzarmc_status]` |
+| `BMC_Public::shortcode_cart()` | سبد خرید اختصاصی + پرداخت | `[bazzarmc_cart]` |
+| `BMC_Public::shortcode_checkout()` | چک‌اوت اختصاصی یا درگاه اتصال | `[bazzarmc_checkout]` |
+| `BMC_Public::render_account_card( $args )` | کارت حساب کاربری (بدون قاب بیرونی) | `[bazzarmc_card title="…" links="orders,cart" layout="grid"]` |
+| `BMC_Public::render_account_nav( $args )` | منوی بخش‌های حساب کاربری ووکامرس | `[bazzarmc_nav layout="pills"]` |
+| `BMC_Public::render_account_content( $endpoint, $args )` | محتوای یک اندپوینت ووکامرس | — |
+| `BMC_Public::render_ranks( $args )` | فهرست رنک‌های فعال کاربر | `[bazzarmc_ranks title="…"]` |
+| `BMC_Public::render_deliveries( $args )` | فهرست تحویل‌های کاربر | `[bazzarmc_deliveries status="pending" limit="10" layout="table"]` |
+| `BMC_Tickets::shortcode_tickets()` | فهرست تیکت‌ها + فرم ثبت | `[bazzarmc_tickets]` |
+| `BMC_Tickets::shortcode_ticket( $atts )` | گفت‌وگوی یک تیکت | `[bazzarmc_ticket id="12"]` |
+| `BMC_Deliveries::for_user( $user_id, $args )` | آرایهٔ ردیف‌های تحویل یک کاربر (بر اساس `user_id` یا بازیکن متصل) | — |
+| `BMC_Deliveries::counts_for_user( $user_id )` | شمار وضعیت‌های تحویل یک کاربر | — |
+
+**پارامترهای `render_account_card()`** (همه اختیاری): `user_id`، `title`، `title_icon`، `layout` (`grid`/`stack`)، `columns` (۱ تا ۴)، `kicker`، `kicker_text`، `email`، `mobile`، `orders`، `roles`، `mc_box`، `ranks_box`، `links`، `link_items` (آرایه‌ای از `orders`، `addresses`، `details`، `cart`، `minecraft`، `tickets`، `logout`)، `avatar_size`، `unlinked_text`، `no_ranks_text`، `manage_label`، `connect_label`.
+
+**پارامترهای `render_account_nav()`**: `layout` (`vertical`/`horizontal`/`pills`)، `icons`، `counts`، `active_only`، `title`، `title_icon`، `items` (فهرست اندپوینت‌های مجاز — خالی = همه)، `extra` (آرایهٔ موارد دلخواه با کلیدهای `label`، `url`، `icon`). آیکون هر اندپوینت با فیلتر `bmc_account_nav_icons` قابل تغییر است.
+
+**پارامترهای `render_account_content()`**: آرگومان اول نام اندپوینت است (`current`، `dashboard`، `orders`، `downloads`، `edit-address`، `payment-methods`، `edit-account`، `minecraft`، `bmc-tickets`، `bmc-ticket`) و آرگومان دوم آرایهٔ `hide_notices`، `address` (`billing`/`shipping`) و `order_id`.
+
+---
+
+## ۹) ویجت‌های المنتور
+
+اگر المنتور (نسخهٔ ۳.۱ یا جدیدتر) فعال باشد، ۱۱ ویجت در دستهٔ **«BazzarMc — فروشگاه ماینکرافت»** ثبت می‌شود:
+
+| نام ویجت (name) | عنوان در پنل |
+|---|---|
+| `bmc-account-card` | کارت حساب کاربری |
+| `bmc-link-box` | اتصال اکانت ماینکرافت |
+| `bmc-status` | وضعیت اتصال |
+| `bmc-account-nav` | منوی حساب کاربری |
+| `bmc-account-content` | محتوای حساب کاربری |
+| `bmc-cart` | سبد خرید اختصاصی |
+| `bmc-checkout` | چک‌اوت اختصاصی |
+| `bmc-tickets` | تیکت‌های پشتیبانی |
+| `bmc-ticket` | گفت‌وگوی تیکت |
+| `bmc-deliveries` | تحویل‌های من |
+| `bmc-ranks` | رنک‌های کاربر |
+
+* بارگذاری: `includes/integrations/class-bmc-elementor.php` (کلاس `BMC_Elementor`) + `includes/integrations/elementor/`
+* کلید تنظیمات: `elementor_enabled` (پیش‌فرض روشن) — بخش «یکپارچه‌سازی المنتور» در تب **ابزارها**
+* دارایی‌ها: `bmc-public`، `bmc-elementor` (و `bmc-vazir` اگر CDN فونت روشن باشد) به‌صورت `get_style_depends()` و `bmc-icons`/`bmc-link`/`bmc-checkout` به‌صورت `get_script_depends()`
+* **بدون المنتور**: هیچ کلاسی بارگذاری نمی‌شود (`did_action('elementor/loaded')` بررسی می‌شود) و افزونه هیچ خطا یا هشداری تولید نمی‌کند.
