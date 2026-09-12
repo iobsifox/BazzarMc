@@ -43,7 +43,7 @@ https://yoursite.com/wp-json/bazzarmc/v1
 {
   "success": true,
   "plugin": "BazzarMc",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "time": "2026-09-12 10:24:33",
   "site": "فروشگاه ماینکرافت من",
   "verify": [ "dashboard", "email" ]
@@ -264,7 +264,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
   ],
   "ranks": [ { "key": "vip", "name": "رتبهٔ VIP", "level": 1, "role": "vip", "days": 30 } ],
   "status": { "enabled": true, "hide_lower": true, "definitions": 3, "manual": 2, "synced_at": 1788000000, "reported_at": 1788003600 },
-  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.4.0" }
+  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.4.1" }
 }
 ```
 
