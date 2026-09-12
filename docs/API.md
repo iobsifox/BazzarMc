@@ -59,8 +59,8 @@ curl -H "X-BMC-Token: TOKEN" https://yoursite.com/wp-json/bazzarmc/v1/ping
 
 | پارامتر | نوع | الزامی | توضیح |
 |---|---|---|---|
-| `code` | string | ✔ | کد نمایش‌داده‌شده در پنل کاربری |
-| `player` | string | ✔ | نام کاربری ماینکرافت (Java: `^[a-zA-Z0-9_]{3,16}$`) |
+| `code` | string | بله | کد نمایش‌داده‌شده در پنل کاربری |
+| `player` | string | بله | نام کاربری ماینکرافت (Java: `^[a-zA-Z0-9_]{3,16}$`) |
 | `uuid` | string | – | UUID بدون خط تیره؛ برای اتصال دقیق‌تر ذخیره می‌شود |
 
 **پاسخ موفق (200)**
@@ -102,7 +102,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 | پارامتر | نوع | الزامی | توضیح |
 |---|---|---|---|
-| `player` | string | ✔ | نام کاربری ماینکرافت |
+| `player` | string | بله | نام کاربری ماینکرافت |
 | `mobile` | string | یکی از دو | شمارهٔ موبایل (مثل `09123456789`) |
 | `email` | string | یکی از دو | ایمیل کاربر |
 | `channel` | string | – | روش تحویل کد: `sms` (پیش‌فرض)، `email` یا `dashboard` — روش «داشبورد» کد را در پاسخ برمی‌گرداند و هزینهٔ پیامکی ندارد |
@@ -126,8 +126,8 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 | پارامتر | نوع | الزامی | توضیح |
 |---|---|---|---|
-| `player` | string | ✔ | نام کاربری ماینکرافت |
-| `code` | string | ✔ | کد دریافتی |
+| `player` | string | بله | نام کاربری ماینکرافت |
+| `code` | string | بله | کد دریافتی |
 | `mobile` | string | یکی از دو | همان شماره‌ای که کد برایش ارسال شد |
 | `email` | string | یکی از دو | همان ایمیلی که کد برایش ارسال شد |
 | `channel` | string | – | همان روشی که کد با آن صادر شد (`sms`/`email`/`dashboard`) |
@@ -144,7 +144,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 | پارامتر | نوع | الزامی |
 |---|---|---|
-| `player` | string | ✔ |
+| `player` | string | بله |
 | `limit` | int | – (پیش‌فرض ۵۰، حداکثر ۲۰۰) |
 
 **متصل**
@@ -175,7 +175,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 | پارامتر | نوع | الزامی | توضیح |
 |---|---|---|---|
-| `player` | string | ✔ | نام بازیکن |
+| `player` | string | بله | نام بازیکن |
 | `limit` | int | – | پیش‌فرض ۵۰، حداکثر ۲۰۰ |
 
 ```json
@@ -208,7 +208,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 | پارامتر | نوع | الزامی |
 |---|---|---|
-| `id` | int | ✔ |
+| `id` | int | بله |
 | `player` | string | – (برای ثبت در لاگ) |
 
 ```json
@@ -221,7 +221,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 | پارامتر | نوع | الزامی |
 |---|---|---|
-| `player` | string | ✔ |
+| `player` | string | بله |
 
 ```json
 { "success": true, "message": "اتصال حذف شد." }

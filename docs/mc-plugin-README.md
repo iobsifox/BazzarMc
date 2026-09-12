@@ -90,7 +90,7 @@ command:
 
 link:
   broadcast: true                       # اعلام اتصال در چت عمومی
-  broadcast-message: "&a✦ &f{player} &7اکانت خود را به سایت متصل کرد!"
+  broadcast-message: "&a» &f{player} &7اکانت خود را به سایت متصل کرد!"
   request-cooldown: 60                  # فاصلهٔ بین دو درخواست کد (ثانیه)
 
 delivery:
