@@ -40,7 +40,7 @@ https://yoursite.com/wp-json/bazzarmc/v1
 {
   "success": true,
   "plugin": "BazzarMc",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "time": "2026-09-12 10:24:33",
   "site": "فروشگاه ماینکرافت من",
   "sms": true
@@ -187,6 +187,10 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
     {
       "id": 18,
       "order_id": 1042,
+      "order_number": "1042",
+      "code": "1042-18",
+      "product": "کوین ۱۰۰",
+      "rank_level": 0,
       "item": "کوین ۱۰۰",
       "key": "gold_pack_2",
       "slug": "gold_pack_2",
@@ -200,7 +204,9 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 }
 ```
 
-> `item` نام محصول است و `key` همان «شناسهٔ تحویل» است که مدیر در تب **محصولات** تعیین می‌کند (نام / شناسهٔ محصول / نامک / SKU / متن دلخواه). پلاگین ماینکرافت برای یافتن محصول در `config.yml` به این ترتیب تلاش می‌کند: `key` → `item` → `variation_id` → `product_id` → `slug` → `sku`.
+> `item` نام محصول است و `key` همان «شناسهٔ تحویل» است که مدیر در تب **محصولات و نقش‌ها** تعیین می‌کند (نام / شناسهٔ محصول / نامک / SKU / متن دلخواه). پلاگین ماینکرافت برای یافتن محصول در `config.yml` به این ترتیب تلاش می‌کند: `key` → `item` → `variation_id` → `product_id` → `slug` → `sku`.
+>
+> **فیلدهای نسخهٔ ۱.۲.۰:** `code` = **کد خرید** (پیش‌فرض `شمارهٔ سفارش-شناسهٔ ردیف`) که در منوی دریافت ماینکرافت به‌عنوان نام آیتم کاغذی استفاده می‌شود؛ `product` = نام نمایشی محصول؛ `order_number` = شمارهٔ سفارش ووکامرس؛ `rank_level` = سطح رنک محصول (۰ اگر رنک نباشد).
 
 ---
 
@@ -231,6 +237,114 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 ---
 
+### `GET /products` — فهرست محصولات سایت (جدید در ۱.۲.۰)
+
+| پارامتر | نوع | الزامی | توضیح |
+|---|---|---|---|
+| `limit` | int | – | پیش‌فرض ۲۰۰، حداکثر ۵۰۰ |
+
+```json
+{
+  "success": true,
+  "count": 1,
+  "products": [
+    {
+      "id": 355,
+      "variation_id": 0,
+      "name": "رتبهٔ VIP",
+      "slug": "vip-rank",
+      "sku": "VIP-30",
+      "key": "vip",
+      "price": 150000,
+      "synced": true,
+      "role": "vip",
+      "days": 30,
+      "rank_level": 1
+    }
+  ],
+  "ranks": [ { "key": "vip", "name": "رتبهٔ VIP", "level": 1, "role": "vip", "days": 30 } ],
+  "status": { "enabled": true, "hide_lower": true, "definitions": 3, "manual": 2, "synced_at": 1788000000, "reported_at": 1788003600 },
+  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.2.0" }
+}
+```
+
+> با `/bmc products` در کنسول سرور بازی، همین فهرست به‌همراه کلید تحویل و سطح رنک هر محصول نمایش داده می‌شود.
+
+---
+
+### `POST /ranks/definitions` — دریافت تعریف رنک‌ها از پلاگین ماینکرافت
+
+بدنهٔ درخواست (از `ranks.list` در `config.yml` پلاگین ساخته می‌شود):
+
+```json
+{
+  "ranks": [
+    { "key": "vip",   "name": "رتبهٔ VIP",  "level": 1, "role": "vip",     "days": 30 },
+    { "key": "vip+",  "name": "رتبهٔ VIP+", "level": 2, "role": "vipplus", "days": 30 },
+    { "key": "legend","name": "رتبهٔ لجند", "level": 3, "role": "legend",  "days": 0  }
+  ]
+}
+```
+
+```json
+{ "success": true, "count": 3, "message": "تعریف ۳ رنک ذخیره شد." }
+```
+
+> تعریف‌ها در کلید `mc_ranks` ذخیره می‌شوند و **منبع اصلی سطح رنک هر محصول** هستند؛ «سطح» تعیین‌شدهٔ دستی در تب محصولات بر آن‌ها اولویت دارد.
+
+---
+
+### `POST /ranks/report` — گزارش زمان باقی‌ماندهٔ رنک یک بازیکن
+
+| پارامتر | نوع | الزامی | توضیح |
+|---|---|---|---|
+| `player` | string | بله | نام بازیکن متصل |
+| `uuid` | string | – | UUID بدون خط تیره (برای لاگ) |
+| `ranks` | array | بله | فهرست رنک‌های فعال بازیکن |
+| `full` | bool | – | پیش‌فرض `true`؛ در این حالت رنک‌هایی که در فهرست نیستند بازپس گرفته می‌شوند |
+
+```json
+{
+  "player": "Notch",
+  "uuid": "069a79f444e94726a5befca90e38aaf5",
+  "full": true,
+  "ranks": [
+    { "key": "vip+", "name": "رتبهٔ VIP+", "level": 2, "role": "vipplus", "days_left": 18, "permanent": false }
+  ]
+}
+```
+
+```json
+{ "success": true, "user_id": 42, "updated": 1, "pruned": 0 }
+```
+
+> اگر بازیکن متصل پیدا نشود `404` برمی‌گردد. هر رنک در متای `bmc_role_grants` کاربر با `source: minecraft` ثبت/به‌روز می‌شود؛ `days_left: -1` همراه با `permanent: true` یعنی رنک دائمی.
+
+---
+
+### `GET /ranks/status` — وضعیت رنک‌های یک بازیکن
+
+| پارامتر | نوع | الزامی |
+|---|---|---|
+| `player` | string | – (خالی = فقط وضعیت کلی سامانهٔ رنک) |
+
+```json
+{
+  "success": true,
+  "linked": true,
+  "user_id": 42,
+  "player": "Notch",
+  "top_level": 2,
+  "ranks": [
+    { "key": "vip+", "name": "رتبهٔ VIP+", "role": "vipplus", "level": 2, "permanent": false,
+      "expires_at": "2026-10-01 12:30:00", "days_left": 18, "hours_left": 432 }
+  ],
+  "status": { "enabled": true, "hide_lower": true, "definitions": 3, "manual": 2, "synced_at": 1788000000, "reported_at": 1788003600 }
+}
+```
+
+---
+
 ## ۳) مسیرهای سازگار با نسخهٔ قدیمی
 
 فقط اگر در تب **اتصال سرور** گزینهٔ «سازگاری با نسخهٔ قدیمی» فعال باشد. آدرس پایه: `…/wp-json/storelinkformc/v1`
@@ -250,17 +364,28 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 آدرس: `POST {site_url}/wp-admin/admin-ajax.php` — همه با پارامتر `security` (nonce) محافظت می‌شوند.
 
-### ورود با رمز یک‌بارمصرف (nonce: `bmc_public`)
+### سامانهٔ تیکت (فرم POST معمولی — بدون AJAX)
 
-| `action` | پارامترها | توضیح |
+> از نسخهٔ ۱.۲.۰، ورود/عضویت با رمز یک‌بارمصرف موبایل از افزونه **حذف شده است** (اکشن‌های `bmc_login_*` دیگر وجود ندارند). رمز یک‌بارمصرف فقط برای **لینک‌کردن اکانت ماینکرافت** استفاده می‌شود (اکشن‌های `bmc_request_link_otp` و `bmc_verify_link_otp` در جدول بعدی).
+
+فرم‌های تیکت به‌صورت POST معمولی به همان آدرس صفحه ارسال می‌شوند و با الگوی «ارسال → تغییر مسیر» (PRG) پاسخ می‌دهند. همه با nonce `bmc_ticket_nonce` محافظت می‌شوند و نیازمند ورود کاربر هستند.
+
+| فیلد `bmc_ticket_action` | سایر فیلدها | توضیح |
 |---|---|---|
-| `bmc_login_request` | `mobile` | ارسال کد ورود |
-| `bmc_login_verify` | `mobile`, `code` | تأیید و ورود (کوکی نشست ست می‌شود) |
-| `bmc_login_resend` | `mobile`, `resend=1` | ارسال مجدد |
+| `create` | `ticket_subject`, `ticket_body`, `ticket_category`, `ticket_product` | ثبت تیکت جدید |
+| `reply` | `ticket_id`, `ticket_body`, `as_staff` (فقط مدیر) | ارسال پاسخ |
+| `close` | `ticket_id` | بستن تیکت |
+| `reopen` | `ticket_id` | بازکردن دوبارهٔ تیکت |
 
-```json
-{ "success": true, "data": { "message": "کد ارسال شد.", "expires_in": 120, "resend_in": 90 } }
-```
+پس از پردازش، کاربر به آدرس تیکت با پارامتر `bmc_ticket_msg` (موفق) یا `bmc_ticket_error` (خطا) بازمی‌گردد.
+
+پیشخوان مدیریت از `admin-post.php` با `action=bmc_ticket` و nonce یکسان استفاده می‌کند:
+
+| فیلد `ticket_action` | سایر فیلدها | توضیح |
+|---|---|---|
+| `reply` | `ticket_id`, `ticket_body`, `is_note` | پاسخ پشتیبانی یا یادداشت داخلی |
+| `status` | `ticket_id`, `status`, `priority` | تغییر وضعیت/اولویت |
+| `delete` | `ticket_id` | حذف تیکت و همهٔ پیام‌ها |
 
 ### پنل اتصال کاربر (nonce: `bmc_frontend` — نیازمند ورود کاربر)
 
@@ -300,7 +425,7 @@ security = <nonce woocommerce-process_checkout>
 | `run_cron` | اجرای دستی زمان‌بند نگهداری |
 | `clear_logs` | پاک‌کردن لاگ‌ها |
 | `rebuild_tables` | بازسازی جدول‌های دیتابیس |
-| `create_pages` | ساخت برگه‌های اتصال/ورود/سبد خرید/چک‌اوت |
+| `create_pages` | ساخت برگه‌های اتصال/سبد خرید/چک‌اوت/تیکت پشتیبانی |
 | `purge_cache` | پاک‌سازی کش سایت + افزونه‌های کش + کلادفلر و حذف transientها |
 | `cf_cache_rule` | ساخت/به‌روزرسانی قاعدهٔ «کش نشود» در کلادفلر (نیازمند `cf_api_token` و `cf_zone_id`) |
 | `run_migration` | مهاجرت از نسخهٔ قدیمی |
@@ -333,11 +458,25 @@ curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
   -d '{"code":"7KQ2M9","player":"Notch"}' "$BASE/link/redeem"
 
-# اتصال با رمز پیامکی
+# اتصال با رمز پیامکی (برای لینک‌کردن اکانت)
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
   -d '{"player":"Notch","mobile":"09123456789"}' "$BASE/link/request"
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
   -d '{"player":"Notch","mobile":"09123456789","code":"12345"}' "$BASE/link/verify"
+
+# فهرست محصولات سایت
+curl -sS -H "X-BMC-Token: $TOKEN" "$BASE/products?limit=100"
+
+# ارسال تعریف رنک‌ها از پلاگین ماینکرافت به سایت
+curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
+  -d '{"ranks":[{"key":"vip","name":"رتبهٔ VIP","level":1,"role":"vip","days":30}]}' "$BASE/ranks/definitions"
+
+# گزارش زمان باقی‌ماندهٔ رنک یک بازیکن
+curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
+  -d '{"player":"Notch","full":true,"ranks":[{"key":"vip","level":1,"role":"vip","days_left":18,"permanent":false}]}' "$BASE/ranks/report"
+
+# وضعیت رنک‌های یک بازیکن
+curl -sS -H "X-BMC-Token: $TOKEN" "$BASE/ranks/status?player=Notch"
 ```
 
 ---
