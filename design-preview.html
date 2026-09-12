@@ -359,6 +359,93 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
 		box-shadow: none;
 	}
 }
+
+/* ---------- ویترین محصولات (۱.۶.۰) ---------- */
+.shop-filter{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:12px}
+.shop-filter__cats{display:flex;flex-wrap:wrap;gap:8px}
+.shop-filter__tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink);font-family:inherit;transition:.15s}
+.pill:hover{border-color:var(--green);color:var(--green-d)}
+.pill span{font-size:11px;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:0 7px;font-weight:700}
+.pill.is-active{background:var(--green);border-color:var(--green-d);color:#fff}
+.pill.is-active span{background:rgba(255,255,255,.24);color:#fff}
+.fld{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px 11px;color:var(--muted)}
+.fld input,.fld select{border:0;outline:0;font-family:inherit;font-size:13px;background:transparent;color:var(--ink);max-width:170px}
+.fld .ico{width:16px;height:16px}
+.shop-count{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);margin:14px 2px 10px}
+.shop-count .ico{width:15px;height:15px}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:18px}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--sh);cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;text-align:center}
+.pcard:hover{transform:translateY(-5px);box-shadow:0 14px 34px rgba(15,23,42,.14)}
+.pcard.is-out{opacity:.72}
+.pcard__media{aspect-ratio:4/3;background:linear-gradient(140deg,#052e16 0%,#14532d 45%,#22c55e 130%);display:grid;place-items:center;color:#bbf7d0;position:relative}
+.pcard__media .big{width:54px;height:54px;opacity:.9}
+.pcard__badges{position:absolute;inset-block-start:10px;inset-inline-start:10px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.pcard__badge{font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px;color:#fff;background:rgba(2,20,10,.55)}
+.pcard__badge--sale{background:#dc2626}
+.pcard__badge--rank{background:#15803d}
+.pcard__qv{position:absolute;inset-block-end:9px;inset-inline-end:9px;display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:#dcfce7;background:rgba(2,20,10,.5);border-radius:999px;padding:3px 9px;opacity:0;transition:.18s}
+.pcard:hover .pcard__qv{opacity:1}
+.pcard__qv .ico{width:13px;height:13px}
+.pcard__body{padding:13px 14px 15px;display:flex;flex-direction:column;gap:7px;flex:1;align-items:center}
+.pcard__cat{font-size:11px;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
+.pcard__cat .ico{width:13px;height:13px}
+.pcard__title{font-size:15px;font-weight:800;line-height:1.6}
+.pcard__ex{font-size:12px;color:var(--muted);line-height:1.85}
+.pcard__price{font-weight:800;color:var(--green-d);font-size:14.5px}
+.pcard__price del{color:var(--soft);font-weight:600;font-size:12px;margin-inline-end:6px}
+.pcard__meta{font-size:11px;color:var(--soft)}
+.pcard__acts{margin-top:auto;padding-top:9px;display:flex;gap:7px;justify-content:center;flex-wrap:wrap}
+.btn-sm{padding:8px 14px;font-size:12.5px;border-radius:12px}
+.btn-dis{background:#e2e8f0;color:#64748b;border:1px solid var(--line);cursor:not-allowed;padding:8px 14px;font-size:12.5px;border-radius:12px;font-family:inherit;font-weight:700}
+.shop-empty{display:none;text-align:center;padding:26px;color:var(--muted);font-size:13px;border:1px dashed var(--line);border-radius:14px}
+.qv{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:18px}
+.qv[hidden]{display:none}
+.qv__scrim{position:absolute;inset:0;background:rgba(2,20,10,.62)}
+.qv__panel{position:relative;width:min(760px,100%);max-height:88vh;overflow:auto;background:var(--card);border-radius:20px;box-shadow:0 30px 80px rgba(2,20,10,.45)}
+.qv__bar{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--card);z-index:2}
+.qv__bar .ico{width:18px;height:18px;color:var(--green-d)}
+.qv__bar h3{font-size:14.5px;font-weight:800;flex:1;margin:0}
+.qv__x{border:1px solid var(--line);background:#fff;border-radius:11px;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+.qv__x:hover{color:var(--red);border-color:var(--red)}
+.qv__x .ico{width:17px;height:17px}
+.qv__body{padding:16px;display:grid;grid-template-columns:230px 1fr;gap:18px}
+.qv__img{aspect-ratio:4/3;border-radius:14px;background:linear-gradient(140deg,#052e16,#14532d 50%,#22c55e 135%);display:grid;place-items:center;color:#bbf7d0;align-self:start}
+.qv__img .big{width:58px;height:58px}
+.qv__title{font-size:18px;font-weight:800;margin-bottom:4px}
+.qv__cat{font-size:11.5px;color:var(--muted);display:inline-flex;align-items:center;gap:5px;margin-bottom:9px}
+.qv__price{font-size:17px;font-weight:800;color:var(--green-d);margin-bottom:10px}
+.qv__price del{color:var(--soft);font-size:13px;font-weight:600;margin-inline-end:7px}
+.qv__sec{font-size:12px;font-weight:800;color:var(--ink);margin:12px 0 5px;display:flex;align-items:center;gap:6px}
+.qv__sec .ico{width:15px;height:15px;color:var(--green-d)}
+.qv__txt{font-size:12.5px;color:#334155;line-height:2}
+.attrs{width:100%;border-collapse:collapse;font-size:12px}
+.attrs th,.attrs td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:start}
+.attrs th{color:var(--muted);font-weight:700;width:40%}
+.qv__note{display:flex;gap:8px;align-items:flex-start;background:var(--green-l);border-radius:12px;padding:9px 11px;font-size:12px;color:#14532d;margin-top:10px}
+.qv__note .ico{width:15px;height:15px;flex:none;margin-top:3px}
+.qv__acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.qv__single{font-size:12px;color:var(--green-d);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+.qv__single .ico{width:14px;height:14px}
+.ep-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+.ep-tbl th,.ep-tbl td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:start;vertical-align:middle}
+.ep-tbl th{background:#f8fafc;color:var(--muted);font-weight:800;font-size:11.5px}
+.ep-tbl td .ico{width:17px;height:17px;color:var(--green-d)}
+.ep-tbl code{background:#f1f5f9;border-radius:7px;padding:1px 7px;font-size:11.5px;direction:ltr;display:inline-block}
+.pillstat{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:800;white-space:nowrap}
+.pillstat.done{background:var(--green-l);color:var(--green-d)}
+.pillstat.wait{background:var(--amber-l);color:var(--amber)}
+.menu-mock{display:flex;flex-direction:column;gap:2px;background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:8px;min-width:230px}
+.menu-mock a{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:11px;font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:none}
+.menu-mock a .ico{width:17px;height:17px;color:var(--muted)}
+.menu-mock a.is-active{background:var(--green);color:#fff}
+.menu-mock a.is-active .ico{color:#dcfce7}
+.menu-mock a.is-new{background:#fff;border:1px dashed var(--green)}
+.menu-mock .cnt{margin-inline-start:auto;font-size:10.5px;font-weight:800;background:var(--red);color:#fff;border-radius:999px;padding:0 7px}
+.menu-mock a.is-active .cnt{background:rgba(255,255,255,.28)}
+.ep-flex{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.ep-flex>div:first-child{flex:1 1 420px;min-width:280px}
+@media(max-width:640px){.qv__body{grid-template-columns:1fr}.shop-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
 </style>
 </head>
 <body>
@@ -383,6 +470,7 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
     <button class="tab" role="tab" aria-selected="false" data-t="tickets"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm0-160q17 0 28.5-11.5T520-480q0-17-11.5-28.5T480-520q-17 0-28.5 11.5T440-480q0 17 11.5 28.5T480-440Zm0-160q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm320 440H160q-33 0-56.5-23.5T80-240v-160q33 0 56.5-23.5T160-480q0-33-23.5-56.5T80-560v-160q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v160q-33 0-56.5 23.5T800-480q0 33 23.5 56.5T880-400v160q0 33-23.5 56.5T800-160Zm0-80v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102h640ZM480-480Z"/></svg> تیکت پشتیبانی</button>
     <button class="tab" role="tab" aria-selected="false" data-t="gate"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z"/></svg> درگاه اتصال</button>
     <button class="tab" role="tab" aria-selected="false" data-t="checkout"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> چک‌اوت اختصاصی</button>
+    <button class="tab" role="tab" aria-selected="false" data-t="shop"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M841-518v318q0 33-23.5 56.5T761-120H201q-33 0-56.5-23.5T121-200v-318q-23-21-35.5-54t-.5-72l42-136q8-26 28.5-43t47.5-17h556q27 0 47 16.5t29 43.5l42 136q12 39-.5 71T841-518Zm-272-42q27 0 41-18.5t11-41.5l-22-140h-78v148q0 21 14 36.5t34 15.5Zm-180 0q23 0 37.5-15.5T441-612v-148h-78l-22 140q-4 24 10.5 42t37.5 18Zm-178 0q18 0 31.5-13t16.5-33l22-154h-78l-40 134q-6 20 6.5 43t41.5 23Zm540 0q29 0 42-23t6-43l-42-134h-76l22 154q3 20 16.5 33t31.5 13ZM201-200h560v-282q-5 2-6.5 2H751q-27 0-47.5-9T663-518q-18 18-41 28t-49 10q-27 0-50.5-10T481-518q-17 18-39.5 28T393-480q-29 0-52.5-10T299-518q-21 21-41.5 29.5T211-480h-4.5q-2.5 0-5.5-2v282Zm560 0H201h560Z"/></svg> ویترین و کارت محصول</button>
     <button class="tab" role="tab" aria-selected="false" data-t="account"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/></svg> کارت حساب کاربری</button>
     <button class="tab" role="tab" aria-selected="false" data-t="admin"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></svg> پنل مدیریت</button>
   </nav>
@@ -671,6 +759,215 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
     </div>
   </section>
 
+  <!-- ============ ۵) ویترین محصولات و کارت محصول (۱.۶.۰) ============ -->
+  <section class="panel" id="p-shop">
+    <div class="card">
+      <div class="card-h">
+        <div>
+          <h2><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M841-518v318q0 33-23.5 56.5T761-120H201q-33 0-56.5-23.5T121-200v-318q-23-21-35.5-54t-.5-72l42-136q8-26 28.5-43t47.5-17h556q27 0 47 16.5t29 43.5l42 136q12 39-.5 71T841-518Zm-272-42q27 0 41-18.5t11-41.5l-22-140h-78v148q0 21 14 36.5t34 15.5Zm-180 0q23 0 37.5-15.5T441-612v-148h-78l-22 140q-4 24 10.5 42t37.5 18Zm-178 0q18 0 31.5-13t16.5-33l22-154h-78l-40 134q-6 20 6.5 43t41.5 23Zm540 0q29 0 42-23t6-43l-42-134h-76l22 154q3 20 16.5 33t31.5 13ZM201-200h560v-282q-5 2-6.5 2H751q-27 0-47.5-9T663-518q-18 18-41 28t-49 10q-27 0-50.5-10T481-518q-17 18-39.5 28T393-480q-29 0-52.5-10T299-518q-21 21-41.5 29.5T211-480h-4.5q-2.5 0-5.5-2v282Zm560 0H201h560Z"/></svg> ویترین محصولات، کارت محصول و مشاهدهٔ سریع</h2>
+          <div class="sub">نوار فیلتر از <b>دسته‌بندی‌های محصول ووکامرس</b> ساخته می‌شود و کارت محصول جزء جداگانه‌ای است. روی هر نقطهٔ کارت <b>به‌جز دکمهٔ خرید</b> کلیک کنید تا پنجرهٔ توضیحات محصول باز شود.</div>
+        </div>
+        <span class="badge b-ok"><span class="dot"></span> ویترین فعال</span>
+      </div>
+      <div class="card-b">
+        <div class="shop-filter">
+          <div class="shop-filter__cats">
+            <button class="pill is-active" type="button" data-cat=""><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg> همهٔ محصولات <span>۵</span></button>
+            <button class="pill" type="button" data-cat="ranks"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg> رنک‌ها <span>۲</span></button>
+            <button class="pill" type="button" data-cat="keys"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/></svg> کلید و آیتم <span>۳</span></button>
+          </div>
+          <div class="shop-filter__tools">
+            <label class="fld"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg><input type="search" placeholder="جست‌وجوی محصول…" data-shop-search></label>
+            <label class="fld"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z"/></svg><select data-shop-sort>
+              <option value="menu_order">ترتیب پیش‌فرض فروشگاه</option>
+              <option value="price">ارزان‌ترین</option>
+              <option value="price-desc">گران‌ترین</option>
+              <option value="date">جدیدترین</option>
+              <option value="title">نام (الفبا)</option>
+            </select></label>
+            <button class="btn btn-o btn-sm" type="button" data-shop-reset><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></svg> پاک‌کردن فیلترها</button>
+          </div>
+        </div>
+
+        <div class="shop-count"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg> <span data-shop-count>نمایش ۵ از ۵ محصول</span></div>
+
+        <div class="shop-grid" data-shop-grid>
+      <article class="pcard" data-cat="ranks" data-name="رنک VIP" data-catname="رنک‌ها" data-price="۲۰۰٬۰۰۰" data-old="۲۵۰٬۰۰۰" data-ex="دسترسی به کیت ویژه، پیشوند رنگی و اولویت ورود به سرور." data-desc="این رنک شامل دسترسی به کیت ویژهٔ VIP، پیشوند رنگی در چت، اولویت ورود هنگام شلوغی سرور و ۲ برابر سکهٔ روزانه است. پس از خرید، رنک به‌صورت خودکار در بازی فعال می‌شود و ۳۰ روز اعتبار دارد؛ خرید مجدد، اعتبار را به زمان باقی‌مانده اضافه می‌کند." data-attrs="کلید رنک در بازی: vip؛ سطح سلسله‌مراتب: ۵؛ گروه LuckPerms: vip؛ کد کالا (SKU): VIP-1" data-rank="VIP" data-days="۳۰ روز" data-sort-price="200000" data-sort-date="4" tabindex="0" aria-haspopup="dialog">
+        <div class="pcard__media"><svg class="ico big" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg>
+          <div class="pcard__badges"><span class="pcard__badge pcard__badge--sale"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M856-390 570-104q-12 12-27 18t-30 6q-15 0-30-6t-27-18L103-457q-11-11-17-25.5T80-513v-287q0-33 23.5-56.5T160-880h287q16 0 31 6.5t26 17.5l352 353q12 12 17.5 27t5.5 30q0 15-5.5 29.5T856-390ZM513-160l286-286-353-354H160v286l353 354ZM260-640q25 0 42.5-17.5T320-700q0-25-17.5-42.5T260-760q-25 0-42.5 17.5T200-700q0 25 17.5 42.5T260-640Zm220 160Z"/></svg> ۲۰٪ تخفیف</span><span class="pcard__badge pcard__badge--rank"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg> رنک VIP</span></div>
+          <span class="pcard__qv"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg> مشاهدهٔ سریع</span>
+        </div>
+        <div class="pcard__body">
+          <span class="pcard__cat"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg> رنک‌ها</span>
+          <h3 class="pcard__title">رنک VIP</h3>
+          <p class="pcard__ex">دسترسی به کیت ویژه، پیشوند رنگی و اولویت ورود به سرور.</p>
+          <div class="pcard__price"><del>۲۵۰٬۰۰۰</del>۲۰۰٬۰۰۰ تومان</div>
+          <div class="pcard__meta"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg> اعتبار رنک: ۳۰ روز</div>
+          <div class="pcard__acts"><button class="btn btn-p btn-sm" type="button" data-noqv="1"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> افزودن به سبد خرید</button></div>
+        </div>
+      </article>
+      <article class="pcard" data-cat="ranks" data-name="رنک MVP" data-catname="رنک‌ها" data-price="۱۲۰٬۰۰۰" data-old="" data-ex="رنک پایهٔ سرور با کیت روزانه و پیشوند ساده." data-desc="رنک MVP نقطهٔ شروع فروشگاه است: کیت روزانه، پیشوند ساده در چت و دسترسی به بخش‌های ویژهٔ لابی. اگر بعداً رنک VIP بخرید، بر پایهٔ سلسله‌مراتب رنک‌ها این رنک از فهرست خرید شما پنهان می‌شود." data-attrs="کلید رنک در بازی: mvp؛ سطح سلسله‌مراتب: ۲؛ گروه LuckPerms: mvp؛ کد کالا (SKU): MVP-1" data-rank="MVP" data-days="۳۰ روز" data-sort-price="120000" data-sort-date="3" tabindex="0" aria-haspopup="dialog">
+        <div class="pcard__media"><svg class="ico big" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/></svg>
+          <div class="pcard__badges"><span class="pcard__badge pcard__badge--rank"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg> رنک MVP</span></div>
+          <span class="pcard__qv"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg> مشاهدهٔ سریع</span>
+        </div>
+        <div class="pcard__body">
+          <span class="pcard__cat"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg> رنک‌ها</span>
+          <h3 class="pcard__title">رنک MVP</h3>
+          <p class="pcard__ex">رنک پایهٔ سرور با کیت روزانه و پیشوند ساده.</p>
+          <div class="pcard__price">۱۲۰٬۰۰۰ تومان</div>
+          <div class="pcard__meta"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg> اعتبار رنک: ۳۰ روز</div>
+          <div class="pcard__acts"><button class="btn btn-p btn-sm" type="button" data-noqv="1"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> افزودن به سبد خرید</button></div>
+        </div>
+      </article>
+      <article class="pcard" data-cat="keys" data-name="کلید کریپر" data-catname="کلید و آیتم" data-price="۴۵٬۰۰۰" data-old="" data-ex="کلید صندوق ویژه با شانس دریافت آیتم‌های نایاب." data-desc="با این کلید می‌توانید صندوق کریپر را در اسپان باز کنید. آیتم‌ها بلافاصله پس از پرداخت در منوی دریافت آیتم‌های بازی (با کد خرید) قرار می‌گیرند و تا ۳۰ روز قابل برداشت‌اند." data-attrs="نوع تحویل: آیتم در منوی بازی؛ کد خرید: BM-48213؛ مدت اعتبار برداشت: ۳۰ روز؛ کد کالا (SKU): KEY-1" data-rank="" data-days="" data-sort-price="45000" data-sort-date="2" tabindex="0" aria-haspopup="dialog">
+        <div class="pcard__media"><svg class="ico big" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/></svg>
+          <div class="pcard__badges"></div>
+          <span class="pcard__qv"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg> مشاهدهٔ سریع</span>
+        </div>
+        <div class="pcard__body">
+          <span class="pcard__cat"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg> کلید و آیتم</span>
+          <h3 class="pcard__title">کلید کریپر</h3>
+          <p class="pcard__ex">کلید صندوق ویژه با شانس دریافت آیتم‌های نایاب.</p>
+          <div class="pcard__price">۴۵٬۰۰۰ تومان</div>
+          
+          <div class="pcard__acts"><button class="btn btn-p btn-sm" type="button" data-noqv="1"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> افزودن به سبد خرید</button></div>
+        </div>
+      </article>
+      <article class="pcard" data-cat="keys" data-name="بستهٔ الماس" data-catname="کلید و آیتم" data-price="از ۹۰٬۰۰۰" data-old="" data-ex="بستهٔ الماس در اندازه‌های ۱۶، ۳۲ و ۶۴ تایی (محصول متغیر)." data-desc="این محصول متغیر است و سه اندازه دارد. در پنجرهٔ مشاهدهٔ سریع، فهرست انتخاب نسخهٔ ووکامرس نمایش داده می‌شود و پس از انتخاب اندازه، قیمت به‌روز و دکمهٔ افزودن به سبد فعال می‌شود." data-attrs="نوع محصول: متغیر (۳ نسخه)؛ اندازه‌ها: ۱۶ / ۳۲ / ۶۴ الماس؛ نوع تحویل: آیتم در منوی بازی؛ کد کالا (SKU): DIA-1" data-rank="" data-days="" data-sort-price="90000" data-sort-date="1" tabindex="0" aria-haspopup="dialog">
+        <div class="pcard__media"><svg class="ico big" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg>
+          <div class="pcard__badges"></div>
+          <span class="pcard__qv"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg> مشاهدهٔ سریع</span>
+        </div>
+        <div class="pcard__body">
+          <span class="pcard__cat"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg> کلید و آیتم</span>
+          <h3 class="pcard__title">بستهٔ الماس</h3>
+          <p class="pcard__ex">بستهٔ الماس در اندازه‌های ۱۶، ۳۲ و ۶۴ تایی (محصول متغیر).</p>
+          <div class="pcard__price">از ۹۰٬۰۰۰ تومان</div>
+          
+          <div class="pcard__acts"><button class="btn btn-p btn-sm" type="button" data-noqv="1"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> انتخاب گزینه‌ها</button></div>
+        </div>
+      </article>
+      <article class="pcard is-out" data-cat="keys" data-name="آیتم ناموجود" data-catname="کلید و آیتم" data-price="۱۵٬۰۰۰" data-old="" data-ex="نمونهٔ کارت محصول ناموجود — دکمهٔ خرید غیرفعال می‌شود." data-desc="وقتی موجودی محصول تمام شود، کارت با حالت کم‌رنگ و دکمهٔ غیرفعال «ناموجود» نمایش داده می‌شود؛ پنجرهٔ مشاهدهٔ سریع همچنان باز می‌شود تا کاربر توضیحات را ببیند." data-attrs="وضعیت موجودی: ناموجود؛ مدیریت موجودی: فعال؛ کد کالا (SKU): OUT-1" data-rank="" data-days="" data-sort-price="15000" data-sort-date="0" tabindex="0" aria-haspopup="dialog">
+        <div class="pcard__media"><svg class="ico big" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+          <div class="pcard__badges"></div>
+          <span class="pcard__qv"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg> مشاهدهٔ سریع</span>
+        </div>
+        <div class="pcard__body">
+          <span class="pcard__cat"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg> کلید و آیتم</span>
+          <h3 class="pcard__title">آیتم ناموجود</h3>
+          <p class="pcard__ex">نمونهٔ کارت محصول ناموجود — دکمهٔ خرید غیرفعال می‌شود.</p>
+          <div class="pcard__price">۱۵٬۰۰۰ تومان</div>
+          
+          <div class="pcard__acts"><button class="btn-dis" type="button" data-noqv="1">ناموجود</button></div>
+        </div>
+      </article>
+        </div>
+
+        <div class="shop-empty" data-shop-empty><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg> محصولی با این فیلترها پیدا نشد.</div>
+
+        <div class="alert a-info" style="margin-top:16px">
+          <span><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></span>
+          <div>
+            <b>راه‌های نمایش:</b> شورت‌کد <span class="cmd">[bazzarmc_shop]</span> (ویترین کامل)، <span class="cmd">[bazzarmc_product_card id="12"]</span> (یک کارت مستقل)،
+            <span class="cmd">[bazzarmc_product_filter target="..."]</span> (فقط نوار فیلتر) و سه ویجت المنتور
+            <b>فروشگاه</b>، <b>کارت محصول</b> و <b>فیلتر محصولات</b>. صفحهٔ تکی محصول هم سه حالت دارد: فعال، <b>غیرفعال</b> (کارت‌ها و پنجرهٔ مشاهدهٔ سریع جایگزین می‌شوند) یا هدایت به آدرس دیگر.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">
+        <div>
+          <h2><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M481-781q106 0 200 45.5T838-604q7 9 4.5 16t-8.5 12q-6 5-14 4.5t-14-8.5q-55-78-141.5-119.5T481-741q-97 0-182 41.5T158-580q-6 9-14 10t-14-4q-7-5-8.5-12.5T126-602q62-85 155.5-132T481-781Zm0 94q135 0 232 90t97 223q0 50-35.5 83.5T688-257q-51 0-87.5-33.5T564-374q0-33-24.5-55.5T481-452q-34 0-58.5 22.5T398-374q0 97 57.5 162T604-121q9 3 12 10t1 15q-2 7-8 12t-15 3q-104-26-170-103.5T358-374q0-50 36-84t87-34q51 0 87 34t36 84q0 33 25 55.5t59 22.5q34 0 58-22.5t24-55.5q0-116-85-195t-203-79q-118 0-203 79t-85 194q0 24 4.5 60t21.5 84q3 9-.5 16T208-205q-8 3-15.5-.5T182-217q-15-39-21.5-77.5T154-374q0-133 96.5-223T481-687Zm0-192q64 0 125 15.5T724-819q9 5 10.5 12t-1.5 14q-3 7-10 11t-17-1q-53-27-109.5-41.5T481-839q-58 0-114 13.5T260-783q-8 5-16 2.5T232-791q-4-8-2-14.5t10-11.5q56-30 117-46t124-16Zm0 289q93 0 160 62.5T708-374q0 9-5.5 14.5T688-354q-8 0-14-5.5t-6-14.5q0-75-55.5-125.5T481-550q-76 0-130.5 50.5T296-374q0 81 28 137.5T406-123q6 6 6 14t-6 14q-6 6-14 6t-14-6q-59-62-90.5-126.5T256-374q0-91 66-153.5T481-590Zm-1 196q9 0 14.5 6t5.5 14q0 75 54 123t126 48q6 0 17-1t23-3q9-2 15.5 2.5T744-191q2 8-3 14t-13 8q-18 5-31.5 5.5t-16.5.5q-89 0-154.5-60T460-374q0-8 5.5-14t14.5-6Z"/></svg> نقطه‌های فرود حساب کاربری (اندپوینت‌ها)</h2>
+          <div class="sub">عنوان، نامک (slug)، آیکون، جایگاه در منو و نشان‌های «اتصال ماینکرافت» و «تیکت پشتیبانی» از تب <b>تأیید و حساب کاربری</b> تنظیم می‌شوند؛ پس از تغییر نامک، پیوندهای یکتا خودکار بازنشانی می‌شوند.</div>
+        </div>
+        <span class="badge b-ok"><span class="dot"></span> ۲ نقطهٔ فرود</span>
+      </div>
+      <div class="card-b">
+        <div class="ep-flex">
+          <div>
+            <table class="ep-tbl">
+              <thead><tr><th>آیکون</th><th>عنوان</th><th>نامک</th><th>جایگاه</th><th>نشان</th><th>وضعیت</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M182-200q-51 0-79-35.5T82-322l42-300q9-60 53.5-99T282-760h396q60 0 104.5 39t53.5 99l42 300q7 51-21 86.5T778-200q-21 0-39-7.5T706-230l-90-90H344l-90 90q-15 15-33 22.5t-39 7.5Zm16-86 114-114h336l114 114q2 2 16 6 11 0 17.5-6.5T800-304l-44-308q-4-29-26-48.5T678-680H282q-30 0-52 19.5T204-612l-44 308q-2 11 4.5 17.5T182-280q2 0 16-6Zm482-154q17 0 28.5-11.5T720-480q0-17-11.5-28.5T680-520q-17 0-28.5 11.5T640-480q0 17 11.5 28.5T680-440Zm-80-120q17 0 28.5-11.5T640-600q0-17-11.5-28.5T600-640q-17 0-28.5 11.5T560-600q0 17 11.5 28.5T600-560ZM310-440h60v-70h70v-60h-70v-70h-60v70h-70v60h70v70Zm170-40Z"/></svg></td>
+                  <td><b>پیوند اکانت بازی</b></td>
+                  <td><code>/my-account/mc-link/</code></td>
+                  <td>اول منو</td>
+                  <td>متصل / نیاز به اتصال</td>
+                  <td><span class="pillstat done">ثبت شد</span></td>
+                </tr>
+                <tr>
+                  <td><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M440-120v-80h320v-284q0-117-81.5-198.5T480-764q-117 0-198.5 81.5T200-484v244h-40q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v49q0 33-23.5 56.5T760-120H440Zm-80-280q-17 0-28.5-11.5T320-440q0-17 11.5-28.5T360-480q17 0 28.5 11.5T400-440q0 17-11.5 28.5T360-400Zm240 0q-17 0-28.5-11.5T560-440q0-17 11.5-28.5T600-480q17 0 28.5 11.5T640-440q0 17-11.5 28.5T600-400Zm-359-62q-7-106 64-182t177-76q89 0 156.5 56.5T720-519q-91-1-167.5-49T435-698q-16 80-67.5 142.5T241-462Z"/></svg></td>
+                  <td><b>پشتیبانی</b></td>
+                  <td><code>/my-account/support/</code></td>
+                  <td>آخر منو (پیش از خروج)</td>
+                  <td>۲ تیکت باز</td>
+                  <td><span class="pillstat done">ثبت شد</span></td>
+                </tr>
+                <tr>
+                  <td><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg></td>
+                  <td>گفت‌وگوی تیکت</td>
+                  <td><code>/my-account/bmc-ticket/</code></td>
+                  <td>—</td>
+                  <td>بدون نشان (نامک رزروشده)</td>
+                  <td><span class="pillstat wait">خارج از منو</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="alert a-warn" style="margin-top:14px">
+              <span><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></svg></span>
+              <div><b>بازنشانی پیوندهای یکتا:</b> اگر نامک را عوض کردید و منو ۴۰۴ داد، افزونه در اولین بارگذاری بعدی خودش <span class="cmd">flush_rewrite_rules()</span> را اجرا می‌کند؛ دکمهٔ «بازسازی پیوندهای یکتا» هم در همان بخش پنل هست.</div>
+            </div>
+          </div>
+          <div>
+            <div class="menu-mock">
+              <a href="#" class="is-new"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M481-781q106 0 200 45.5T838-604q7 9 4.5 16t-8.5 12q-6 5-14 4.5t-14-8.5q-55-78-141.5-119.5T481-741q-97 0-182 41.5T158-580q-6 9-14 10t-14-4q-7-5-8.5-12.5T126-602q62-85 155.5-132T481-781Zm0 94q135 0 232 90t97 223q0 50-35.5 83.5T688-257q-51 0-87.5-33.5T564-374q0-33-24.5-55.5T481-452q-34 0-58.5 22.5T398-374q0 97 57.5 162T604-121q9 3 12 10t1 15q-2 7-8 12t-15 3q-104-26-170-103.5T358-374q0-50 36-84t87-34q51 0 87 34t36 84q0 33 25 55.5t59 22.5q34 0 58-22.5t24-55.5q0-116-85-195t-203-79q-118 0-203 79t-85 194q0 24 4.5 60t21.5 84q3 9-.5 16T208-205q-8 3-15.5-.5T182-217q-15-39-21.5-77.5T154-374q0-133 96.5-223T481-687Zm0-192q64 0 125 15.5T724-819q9 5 10.5 12t-1.5 14q-3 7-10 11t-17-1q-53-27-109.5-41.5T481-839q-58 0-114 13.5T260-783q-8 5-16 2.5T232-791q-4-8-2-14.5t10-11.5q56-30 117-46t124-16Zm0 289q93 0 160 62.5T708-374q0 9-5.5 14.5T688-354q-8 0-14-5.5t-6-14.5q0-75-55.5-125.5T481-550q-76 0-130.5 50.5T296-374q0 81 28 137.5T406-123q6 6 6 14t-6 14q-6 6-14 6t-14-6q-59-62-90.5-126.5T256-374q0-91 66-153.5T481-590Zm-1 196q9 0 14.5 6t5.5 14q0 75 54 123t126 48q6 0 17-1t23-3q9-2 15.5 2.5T744-191q2 8-3 14t-13 8q-18 5-31.5 5.5t-16.5.5q-89 0-154.5-60T460-374q0-8 5.5-14t14.5-6Z"/></svg> پیوند اکانت بازی <span class="cnt">!</span></a>
+              <a href="#" class="is-active"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M841-518v318q0 33-23.5 56.5T761-120H201q-33 0-56.5-23.5T121-200v-318q-23-21-35.5-54t-.5-72l42-136q8-26 28.5-43t47.5-17h556q27 0 47 16.5t29 43.5l42 136q12 39-.5 71T841-518Zm-272-42q27 0 41-18.5t11-41.5l-22-140h-78v148q0 21 14 36.5t34 15.5Zm-180 0q23 0 37.5-15.5T441-612v-148h-78l-22 140q-4 24 10.5 42t37.5 18Zm-178 0q18 0 31.5-13t16.5-33l22-154h-78l-40 134q-6 20 6.5 43t41.5 23Zm540 0q29 0 42-23t6-43l-42-134h-76l22 154q3 20 16.5 33t31.5 13ZM201-200h560v-282q-5 2-6.5 2H751q-27 0-47.5-9T663-518q-18 18-41 28t-49 10q-27 0-50.5-10T481-518q-17 18-39.5 28T393-480q-29 0-52.5-10T299-518q-21 21-41.5 29.5T211-480h-4.5q-2.5 0-5.5-2v282Zm560 0H201h560Z"/></svg> داشبورد</a>
+              <a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M240-160q-50 0-85-35t-35-85H40v-440q0-33 23.5-56.5T120-800h560v160h120l120 160v200h-80q0 50-35 85t-85 35q-50 0-85-35t-35-85H360q0 50-35 85t-85 35Zm0-80q17 0 28.5-11.5T280-280q0-17-11.5-28.5T240-320q-17 0-28.5 11.5T200-280q0 17 11.5 28.5T240-240ZM120-360h32q17-18 39-29t49-11q27 0 49 11t39 29h272v-360H120v360Zm600 120q17 0 28.5-11.5T760-280q0-17-11.5-28.5T720-320q-17 0-28.5 11.5T680-280q0 17 11.5 28.5T720-240Zm-40-200h170l-90-120h-80v120ZM360-540Z"/></svg> سفارش‌ها</a>
+              <a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/></svg> آدرس‌ها</a>
+              <a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg> جزئیات حساب</a>
+              <a href="#" class="is-new"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M440-120v-80h320v-284q0-117-81.5-198.5T480-764q-117 0-198.5 81.5T200-484v244h-40q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v49q0 33-23.5 56.5T760-120H440Zm-80-280q-17 0-28.5-11.5T320-440q0-17 11.5-28.5T360-480q17 0 28.5 11.5T400-440q0 17-11.5 28.5T360-400Zm240 0q-17 0-28.5-11.5T560-440q0-17 11.5-28.5T600-480q17 0 28.5 11.5T640-440q0 17-11.5 28.5T600-400Zm-359-62q-7-106 64-182t177-76q89 0 156.5 56.5T720-519q-91-1-167.5-49T435-698q-16 80-67.5 142.5T241-462Z"/></svg> پشتیبانی <span class="cnt">۲</span></a>
+              <a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg> خروج</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qv" id="qvMock" hidden role="dialog" aria-modal="true" aria-labelledby="qvMockTitle">
+      <div class="qv__scrim" data-qv-close></div>
+      <div class="qv__panel">
+        <div class="qv__bar">
+          <svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg>
+          <h3 id="qvMockTitle">مشاهدهٔ سریع</h3>
+          <button class="qv__x" type="button" data-qv-close aria-label="بستن"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
+        </div>
+        <div class="qv__body">
+          <div class="qv__img" data-qv-img></div>
+          <div>
+            <div class="qv__title" data-qv-name></div>
+            <div class="qv__cat"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m260-520 220-360 220 360H260ZM700-80q-75 0-127.5-52.5T520-260q0-75 52.5-127.5T700-440q75 0 127.5 52.5T880-260q0 75-52.5 127.5T700-80Zm-580-20v-320h320v320H120Zm580-60q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29Zm-500-20h160v-160H200v160Zm202-420h156l-78-126-78 126Zm78 0ZM360-340Zm340 80Z"/></svg> <span data-qv-cat></span></div>
+            <div class="qv__price" data-qv-price></div>
+            <div class="qv__sec"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg> چکیده</div>
+            <div class="qv__txt" data-qv-ex></div>
+            <div class="qv__sec"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/></svg> توضیحات محصول</div>
+            <div class="qv__txt" data-qv-desc></div>
+            <div class="qv__sec"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z"/></svg> ویژگی‌ها</div>
+            <table class="attrs" data-qv-attrs></table>
+            <div class="qv__note" data-qv-rank><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg> <span></span></div>
+            <div class="qv__acts">
+              <button class="btn btn-p" type="button"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> افزودن به سبد خرید</button>
+              <a class="qv__single" href="#">دیدن صفحهٔ کامل محصول <svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ ۵) پنل مدیریت ============ -->
   <section class="panel" id="p-account">
     <div class="note" style="margin-bottom:16px">
@@ -882,14 +1179,14 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
   </section>
 
   <div class="foot">
-    BazzarMc ۱.۲.۰ &nbsp;•&nbsp; GPL-2.0-or-later &nbsp;•&nbsp; پیش‌نمایش طراحی (بدون دادهٔ واقعی)<br>
-    میان‌برها: <span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span> <span class="kbd">4</span> <span class="kbd">5</span> برای جابه‌جایی بین نماها
+    BazzarMc ۱.۶.۰ &nbsp;•&nbsp; GPL-2.0-or-later &nbsp;•&nbsp; پیش‌نمایش طراحی (بدون دادهٔ واقعی)<br>
+    میان‌برها: <span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span> <span class="kbd">4</span> <span class="kbd">5</span> <span class="kbd">6</span> <span class="kbd">7</span> برای جابه‌جایی بین نماها
   </div>
 </div>
 
 <script>
 (function(){
-  var tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel'),keys=['link','tickets','gate','checkout','account','admin'];
+  var tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel'),keys=['link','tickets','gate','checkout','shop','account','admin'];
   function show(t){
     tabs.forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.t===t));});
     panels.forEach(function(p){p.classList.toggle('active',p.id==='p-'+t);});
@@ -935,6 +1232,99 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
     codeText.textContent='کد باطل شد';codeText.classList.add('empty');
     left=0;fill.style.width='0%';lbl.textContent=fa('00:00');
   });
+
+  /* ویترین محصولات (۱.۶.۰) */
+  var grid=document.querySelector('[data-shop-grid]');
+  if(grid){
+    var cards=Array.prototype.slice.call(grid.querySelectorAll('.pcard'));
+    var pills=document.querySelectorAll('.shop-filter .pill');
+    var search=document.querySelector('[data-shop-search]');
+    var sortSel=document.querySelector('[data-shop-sort]');
+    var resetBtn=document.querySelector('[data-shop-reset]');
+    var countEl=document.querySelector('[data-shop-count]');
+    var emptyEl=document.querySelector('[data-shop-empty]');
+    var state={cat:'',s:'',sort:'menu_order'};
+
+    function apply(){
+      var shown=0;
+      cards.forEach(function(c){
+        var okCat=!state.cat||c.dataset.cat===state.cat;
+        var okSearch=!state.s||(c.dataset.name+c.dataset.catname+c.dataset.ex).indexOf(state.s)>-1;
+        var ok=okCat&&okSearch;
+        c.style.display=ok?'':'none';
+        if(ok){shown++;}
+      });
+      var sorted=cards.slice();
+      if(state.sort==='price'){sorted.sort(function(a,b){return (+a.dataset.sortPrice)-(+b.dataset.sortPrice);});}
+      else if(state.sort==='price-desc'){sorted.sort(function(a,b){return (+b.dataset.sortPrice)-(+a.dataset.sortPrice);});}
+      else if(state.sort==='title'){sorted.sort(function(a,b){return a.dataset.name<b.dataset.name?-1:1;});}
+      else{sorted.sort(function(a,b){return (+b.dataset.sortDate)-(+a.dataset.sortDate);});}
+      sorted.forEach(function(c){grid.appendChild(c);});
+      countEl.textContent='نمایش '+fa(shown)+' از '+fa(cards.length)+' محصول';
+      emptyEl.style.display=shown?'none':'block';
+    }
+
+    pills.forEach(function(p){
+      p.addEventListener('click',function(){
+        pills.forEach(function(x){x.classList.toggle('is-active',x===p);});
+        state.cat=p.dataset.cat||'';
+        apply();
+      });
+    });
+    search.addEventListener('input',function(){state.s=this.value.trim();apply();});
+    sortSel.addEventListener('change',function(){state.sort=this.value;apply();});
+    resetBtn.addEventListener('click',function(){
+      state={cat:'',s:'',sort:'menu_order'};
+      search.value='';sortSel.value='menu_order';
+      pills.forEach(function(x){x.classList.toggle('is-active',x.dataset.cat==='');});
+      apply();
+    });
+
+    var qv=document.getElementById('qvMock');
+    var qvOpener=null;
+    function setTxt(sel,val){var el=qv.querySelector(sel);if(el){el.textContent=val;}}
+    function openQv(card){
+      qvOpener=card;
+      var d=card.dataset;
+      setTxt('[data-qv-name]',d.name);
+      setTxt('[data-qv-cat]',d.catname);
+      qv.querySelector('[data-qv-price]').innerHTML=(d.old?'<del>'+d.old+'</del>':'')+d.price+' تومان';
+      setTxt('[data-qv-ex]',d.ex);
+      setTxt('[data-qv-desc]',d.desc);
+      var rows='';
+      d.attrs.split('؛').forEach(function(pair){
+        var kv=pair.split(':');
+        if(kv.length===2){rows+='<tr><th>'+kv[0].trim()+'</th><td>'+kv[1].trim()+'</td></tr>';}
+      });
+      qv.querySelector('[data-qv-attrs]').innerHTML=rows;
+      var rankBox=qv.querySelector('[data-qv-rank]');
+      rankBox.style.display=d.rank?'':'none';
+      if(d.rank){rankBox.querySelector('span').textContent='این محصول رنک '+d.rank+' است (اعتبار '+d.days+') و پس از پرداخت، خودکار در بازی فعال می‌شود.';}
+      qv.querySelector('[data-qv-img]').innerHTML=card.querySelector('.pcard__media .big').outerHTML;
+      qv.hidden=false;
+      qv.querySelector('.qv__x').focus();
+    }
+    function closeQv(){
+      if(qv.hidden){return;}
+      qv.hidden=true;
+      if(qvOpener){qvOpener.focus();qvOpener=null;}
+    }
+    cards.forEach(function(card){
+      card.addEventListener('click',function(e){
+        if(e.target.closest('[data-noqv]')){return;}
+        openQv(card);
+      });
+      card.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){
+          if(e.target.closest('[data-noqv]')){return;}
+          e.preventDefault();openQv(card);
+        }
+      });
+    });
+    qv.querySelectorAll('[data-qv-close]').forEach(function(el){el.addEventListener('click',closeQv);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeQv();}});
+    apply();
+  }
 
   /* سوئیچ‌ها و درگاه‌ها */
   document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on');});});
