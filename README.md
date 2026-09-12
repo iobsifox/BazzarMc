@@ -14,8 +14,8 @@
 
 | فایل | چیست | از کجا |
 |---|---|---|
-| `bazzarmc-1.0.0.zip` | افزونهٔ وردپرس | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`dist/bazzarmc-1.0.0.zip`](dist/bazzarmc-1.0.0.zip) |
-| `BazzarMC-1.0.0.jar` | پلاگین ماینکرافت (Spigot / Paper / Purpur) | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`dist/BazzarMC-1.0.0.jar`](dist/BazzarMC-1.0.0.jar) |
+| `bazzarmc-1.0.0.zip` | افزونهٔ وردپرس | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`release/bazzarmc-1.0.0.zip`](release/bazzarmc-1.0.0.zip) |
+| `BazzarMC-1.0.0.jar` | پلاگین ماینکرافت (Spigot / Paper / Purpur) | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`release/BazzarMC-1.0.0.jar`](release/BazzarMC-1.0.0.jar) |
 | `design-preview.html` | پیش‌نمایش ثابتِ همهٔ نماهای رابط کاربری | بازکردن در مرورگر |
 
 **نیازمندی‌ها**
