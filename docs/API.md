@@ -212,13 +212,46 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 ### `POST /deliveries/mark` — ثبت تحویل
 
-| پارامتر | نوع | الزامی |
-|---|---|---|
-| `id` | int | بله |
-| `player` | string | – (برای ثبت در لاگ) |
+| پارامتر | نوع | الزامی | توضیح |
+|---|---|---|---|
+| `id` | int | بله | شناسهٔ ردیف تحویل |
+| `player` | string | – | برای ثبت در لاگ و مطابقت با ردیف |
+| `note` | string | – | **جدید در ۱.۷.۰** — خلاصهٔ پاداش اعطاشده (مثلاً «رنک VIP + ۲ دستور + ۶۴ آیتم») که در ستون «گزارش» پنل و در «تحویل‌های من» نمایش داده می‌شود |
 
 ```json
 { "success": true, "message": "تحویل ثبت شد." }
+```
+
+> هر بار ثبت تحویل، ستون‌های `attempts` و `last_attempt_at` هم به‌روز می‌شوند. اگر ردیف پیش‌تر تحویل‌شده باشد، `400` با پیام «قبلاً تحویل داده شده یا یافت نشد.» برمی‌گردد.
+
+---
+
+### `POST /deliveries/report` — گزارش تلاش ناموفق تحویل (جدید در ۱.۷.۰)
+
+پلاگین ماینکرافت وقتی خریدی را بررسی می‌کند ولی پاداشی اعطا نمی‌شود (مثلاً محصول در `config.yml` تعریف نشده یا اینونتوری بازیکن پر است)، دلیل را به سایت گزارش می‌دهد تا ردیف **بی‌دلیل در صف نماند** و مدیر بداند مشکل چیست.
+
+| پارامتر | نوع | الزامی | توضیح |
+|---|---|---|---|
+| `id` | int | بله | شناسهٔ ردیف تحویل |
+| `player` | string | – | اگر ردیف بازیکن خالی داشته باشد، با این مقدار پر می‌شود |
+| `note` | string | – | دلیل تحویل‌نشدن (حداکثر ۲۵۰ نویسه) |
+
+```json
+{ "success": true, "message": "گزارش تلاش ثبت شد.", "attempts": 3 }
+```
+
+| کد | شرایط |
+|---|---|
+| `400` | `id` داده نشده یا ردیف یافت نشد |
+| `400` | ردیف دیگر در صف تحویل نیست (تحویل‌شده/منقضی/لغوشده) |
+| `403` | کلید `delivery_report_enabled` در پنل خاموش است |
+
+> وضعیت ردیف با این فراخوانی **تغییر نمی‌کند** (در انتظار می‌ماند)؛ فقط `attempts` یکی زیاد می‌شود، `last_attempt_at` و `note` ثبت می‌گردد و یک رویداد با سطح `warning` در لاگ افزونه نوشته می‌شود. ردیف‌هایی که تلاش ناموفق دارند یا بیش از `delivery_stuck_days` روز در صف مانده‌اند، در تب **تحویل‌ها ← فیلتر «گیرکرده»** و در **بررسی سلامت سایت** گزارش می‌شوند.
+
+```bash
+curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
+  -d '{"id":18,"player":"Notch","note":"محصول در config.yml تعریف نشده است"}' \
+  "$BASE/deliveries/report"
 ```
 
 ---
@@ -355,6 +388,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 | `POST /verify-link` | `/link/verify` | `email`, `code` |
 | `GET /pending` | `/deliveries` | `player` |
 | `POST /mark-delivered` | `/deliveries/mark` | `id` |
+| – | `/deliveries/report` (۱.۷.۰) | `id`, `player`, `note` |
 
 پاسخ‌ها مطابق قالب قدیمی (`{"success":true,"deliveries":[…]}`) هستند تا پلاگین‌های سمت سرور قدیمی بدون تغییر کار کنند.
 
@@ -489,7 +523,7 @@ curl -sS -H "X-BMC-Token: $TOKEN" "$BASE/deliveries?player=Notch&limit=20"
 
 # ثبت تحویل ردیف ۱۸
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
-  -d '{"id":18,"player":"Notch"}' "$BASE/deliveries/mark"
+  -d '{"id":18,"player":"Notch","note":"رنک VIP + ۱ دستور"}' "$BASE/deliveries/mark"
 
 # اتصال با کد پنل
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
