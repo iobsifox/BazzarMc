@@ -43,7 +43,7 @@ https://yoursite.com/wp-json/bazzarmc/v1
 {
   "success": true,
   "plugin": "BazzarMc",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "time": "2026-09-12 10:24:33",
   "site": "فروشگاه ماینکرافت من",
   "verify": [ "dashboard", "email" ]
@@ -264,7 +264,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
   ],
   "ranks": [ { "key": "vip", "name": "رتبهٔ VIP", "level": 1, "role": "vip", "days": 30 } ],
   "status": { "enabled": true, "hide_lower": true, "definitions": 3, "manual": 2, "synced_at": 1788000000, "reported_at": 1788003600 },
-  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.4.1" }
+  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.5.0" }
 }
 ```
 
@@ -412,6 +412,43 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 POST {site_url}/?wc-ajax=checkout
 security = <nonce woocommerce-process_checkout>
 ```
+
+#### فیلدهای دلخواه فرم خرید (جدید در ۱.۵.۰)
+
+فیلدهای ساخته‌شده در تب **پرداخت ← «فیلدهای دلخواه فرم خرید»** با همان درخواست بالا ارسال می‌شوند. نام هر فیلد `bmc_cf_<شناسه>` است (برای چندانتخابی `bmc_cf_<شناسه>[]` و برای آپلود فایل در `$_FILES`). اگر فایلی تعریف شده باشد، بدنهٔ درخواست به‌جای `application/x-www-form-urlencoded` به‌صورت `multipart/form-data` فرستاده می‌شود.
+
+| قلم | مقدار |
+|---|---|
+| متادیتای هر فیلد در سفارش | `_bmc_cf_<شناسه>` |
+| متادیتای نام فایل پیوست | `_bmc_cf_<شناسه>_name` |
+| خلاصهٔ همهٔ فیلدها | `_bmc_custom_fields` (آرایه‌ای از `id`, `label`, `value` و در صورت فایل `url`) |
+| هوک اعتبارسنجی | `woocommerce_checkout_process` (اولویت ۲۰) → `wc_add_notice()` با پیام فارسی |
+| هوک ذخیره | `woocommerce_checkout_create_order` (اولویت ۲۰) |
+| نمایش در پیشخوان | `woocommerce_admin_order_data_after_billing_address` |
+| نمایش در ایمیل | `woocommerce_email_order_meta_fields` |
+| نمایش در صفحهٔ تشکر | `woocommerce_thankyou` (اولویت ۵) |
+| تزریق در چیدمان فرم | فیلتر `bmc_checkout_field_plan` |
+
+کلیدهای تنظیمات: `checkout_custom_enabled` (yes/no)، `checkout_custom_fields` (آرایهٔ تعریف فیلدها، حداکثر ۴۰)، `checkout_custom_order` (ترتیب ردیف‌ها در سازنده) و برای هر فیلد آمادهٔ ووکامرس کلیدهای `order`, `label`, `placeholder`, `help`, `width`, `required`, `enabled`, `section` در `checkout_layout`.
+
+هر فیلد دلخواه این کلیدها را دارد: `id`, `type`, `label`, `placeholder`, `help`, `default`, `required`, `width`, `order`, `options`, `min`, `max`, `rows`, `pattern`, `message`, `accept`, `iran_phone`, `section`, `audience` (`all`/`guest`/`user`), `only_synced`, `show_if`, `show_if_is`, `enabled`, `admin_show`, `email_show`, `save_meta`.
+
+کلاس `BMC_Checkout_Fields`:
+
+| متد | کار |
+|---|---|
+| `BMC_Checkout_Fields::enabled()` | فعال بودن سازنده (کلید روشن + دست‌کم یک فیلد + نبودن حالت ایمن) |
+| `BMC_Checkout_Fields::custom_fields()` | فهرست فیلدهای نرمال‌سازی‌شده |
+| `BMC_Checkout_Fields::active_fields()` | فیلدهای فعال پس از اعمال مخاطب (مهمان/واردشده) و «فقط آیتم ماینکرافت» |
+| `BMC_Checkout_Fields::field_name( $id )` / `meta_key( $id )` | نام فیلد در POST و کلید متا در سفارش |
+| `BMC_Checkout_Fields::validate_field( $field, $value )` | `array( 'value' => ..., 'error' => ... )` |
+| `BMC_Checkout_Fields::valid_national_code( $code )` | اعتبارسنجی کد ملی ۱۰ رقمی |
+| `BMC_Checkout_Fields::values_from_order( $order )` | خواندن خلاصهٔ فیلدها از سفارش |
+| `BMC_Checkout_Fields::render_field_row( $field, $value, $width )` | خروجی HTML یک فیلد در فرم |
+| `BMC_Checkout_Fields::sections()` | شش بخش مقصد فیلدها |
+| `BMC_Checkout_Fields::builder_meta()` | دادهٔ متا برای سازندهٔ پنل مدیریت |
+
+فیلترها: `bmc_checkout_field_types` (افزودن/حذف نوع فیلد)، `bmc_checkout_field` (تغییر تعریف یک فیلد پس از نرمال‌سازی) و هوک `bmc_checkout_fields_validated` با پارامترهای `$ok` و `$values`.
 
 ### AJAX پنل مدیریت (nonce: `bmc_admin` — نیازمند `manage_woocommerce`)
 
