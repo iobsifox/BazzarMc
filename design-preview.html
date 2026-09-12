@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BazzarMc — پیش‌نمایش طراحی</title>
+<style>
+:root{
+  --green:#16a34a; --green-d:#15803d; --green-l:#dcfce7;
+  --ink:#0f172a; --muted:#64748b; --soft:#94a3b8;
+  --bg:#f1f5f9; --card:#ffffff; --line:#e2e8f0;
+  --red:#dc2626; --red-l:#fee2e2; --amber:#d97706; --amber-l:#fef3c7;
+  --blue:#2563eb; --blue-l:#dbeafe;
+  --r:16px; --sh:0 1px 2px rgba(15,23,42,.04),0 8px 24px rgba(15,23,42,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Vazirmatn','IRANSans','Tahoma','Segoe UI',sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.9; font-size:15px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 18px 70px}
+
+/* ---------- سربرگ ---------- */
+.top{
+  background:linear-gradient(135deg,#052e16 0%,#14532d 45%,#166534 100%);
+  color:#fff;border-radius:22px;padding:30px 28px;position:relative;overflow:hidden;box-shadow:var(--sh);
+}
+.top:after{
+  content:"";position:absolute;inset-block-start:-70px;inset-inline-start:-40px;width:260px;height:260px;
+  background:radial-gradient(circle,rgba(74,222,128,.35),transparent 70%);border-radius:50%;
+}
+.top .brand{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.logo{
+  width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.14);
+  display:grid;place-items:center;font-size:22px;border:1px solid rgba(255,255,255,.22)
+}
+.top h1{font-size:22px;font-weight:800;letter-spacing:-.2px}
+.top p{color:#bbf7d0;font-size:13.5px;margin-top:2px}
+.top .note{margin-top:16px;position:relative;z-index:1;font-size:13px;color:#d1fae5;background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 14px}
+
+/* ---------- تب‌ها ---------- */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 20px}
+.tab{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  padding:9px 16px;border-radius:999px;cursor:pointer;font:inherit;font-size:13.5px;font-weight:600;
+  transition:.18s;display:flex;align-items:center;gap:7px
+}
+.tab:hover{border-color:#86efac;color:var(--green-d)}
+.tab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 6px 16px rgba(22,163,74,.28)}
+.panel{display:none;animation:fade .25s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------- اجزای عمومی ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.card-h{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.card-h h2{font-size:16.5px;font-weight:800;display:flex;align-items:center;gap:9px}
+.card-h .sub{font-size:12.5px;color:var(--muted);margin-top:3px}
+.card-b{padding:22px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid transparent}
+.b-ok{background:var(--green-l);color:var(--green-d);border-color:#bbf7d0}
+.b-warn{background:var(--amber-l);color:var(--amber);border-color:#fde68a}
+.b-info{background:var(--blue-l);color:var(--blue);border-color:#bfdbfe}
+.b-mut{background:#f1f5f9;color:var(--muted);border-color:var(--line)}
+.b-red{background:var(--red-l);color:var(--red);border-color:#fecaca}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block}
+
+.btn{
+  border:0;cursor:pointer;font:inherit;font-weight:700;font-size:14px;padding:11px 22px;border-radius:12px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s
+}
+.btn-p{background:var(--green);color:#fff;box-shadow:0 6px 16px rgba(22,163,74,.25)}
+.btn-p:hover{background:var(--green-d);transform:translateY(-1px)}
+.btn-o{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-o:hover{border-color:#86efac;color:var(--green-d)}
+.btn-g{background:#f1f5f9;color:var(--muted)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-sm{padding:7px 13px;font-size:12.5px;border-radius:9px}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:#334155}
+.field .hint{font-size:11.5px;color:var(--soft);margin-top:6px}
+.input{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:14px;
+  background:#fff;color:var(--ink);transition:.18s;outline:none
+}
+.input:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(22,163,74,.12)}
+.input::placeholder{color:#cbd5e1}
+select.input{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:left 14px center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+
+.alert{border-radius:12px;padding:13px 16px;font-size:13.5px;display:flex;gap:10px;align-items:flex-start;border:1px solid}
+.a-warn{background:var(--amber-l);border-color:#fde68a;color:#92400e}
+.a-ok{background:var(--green-l);border-color:#bbf7d0;color:#166534}
+.a-info{background:var(--blue-l);border-color:#bfdbfe;color:#1e40af}
+.a-red{background:var(--red-l);border-color:#fecaca;color:#991b1b}
+
+/* ---------- پنل کاربری / کد اتصال ---------- */
+.profile{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#f8fafc}
+.avatar{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#22c55e,#15803d);display:grid;place-items:center;color:#fff;font-size:24px;flex:0 0 auto}
+.profile .who{flex:1;min-width:0}
+.profile .who b{display:block;font-size:15px}
+.profile .who span{font-size:12.5px;color:var(--muted)}
+.mc-row{display:flex;align-items:center;gap:10px;margin-top:14px;padding:12px 14px;border-radius:12px;background:#fff;border:1px dashed #cbd5e1}
+.mc-face{width:34px;height:34px;border-radius:8px;background:repeating-linear-gradient(45deg,#a3a3a3,#a3a3a3 4px,#737373 4px,#737373 8px);flex:0 0 auto}
+
+.codebox{margin-top:18px;border:1px solid #bbf7d0;background:linear-gradient(180deg,#f0fdf4,#fff);border-radius:16px;padding:20px;text-align:center}
+.codebox .lbl{font-size:12.5px;color:var(--green-d);font-weight:700;letter-spacing:.4px}
+.code{
+  font-family:'SFMono-Regular',Consolas,'Courier New',monospace;font-size:34px;font-weight:800;letter-spacing:8px;
+  direction:ltr;color:var(--ink);margin:10px 0 4px;padding-inline-start:12px;user-select:all
+}
+.code.empty{letter-spacing:0;font-size:20px;color:var(--soft);font-family:inherit}
+.timer{height:7px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:16px 0 8px}
+.timer i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#22c55e,#16a34a);border-radius:99px;transition:width 1s linear}
+.timer.low i{background:linear-gradient(90deg,#f59e0b,#dc2626)}
+.tmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.tmeta b{color:var(--ink)}
+.code-actions{display:flex;gap:9px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.steps{margin-top:18px;display:grid;gap:9px}
+.step{display:flex;gap:11px;align-items:flex-start;font-size:13px;color:#334155}
+.step i{width:22px;height:22px;flex:0 0 auto;border-radius:7px;background:var(--green-l);color:var(--green-d);font-style:normal;font-weight:800;font-size:12px;display:grid;place-items:center;margin-top:3px}
+.cmd{direction:ltr;display:inline-block;background:#0f172a;color:#4ade80;padding:2px 8px;border-radius:6px;font-family:Consolas,monospace;font-size:12.5px}
+
+/* ---------- ورود پیامکی ---------- */
+.auth{max-width:430px;margin:0 auto}
+.auth .card-b{padding:26px}
+.otp{display:flex;gap:9px;justify-content:center;direction:ltr;margin:20px 0 6px}
+.otp input{
+  width:52px;height:60px;text-align:center;font-size:24px;font-weight:800;border:1.5px solid var(--line);
+  border-radius:13px;outline:none;font-family:Consolas,monospace;color:var(--ink);background:#f8fafc;transition:.15s
+}
+.otp input:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 4px rgba(22,163,74,.12)}
+.center{text-align:center}
+.resend{font-size:12.5px;color:var(--muted);margin-top:10px}
+.resend a{color:var(--green-d);font-weight:700;text-decoration:none;cursor:pointer}
+.divider{display:flex;align-items:center;gap:12px;color:var(--soft);font-size:12px;margin:22px 0}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:var(--line)}
+.integrations{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+
+/* ---------- درگاه (gate) ---------- */
+.gate{max-width:620px;margin:0 auto;text-align:center;padding:44px 30px}
+.gate .icon{width:86px;height:86px;margin:0 auto 18px;border-radius:24px;background:var(--amber-l);display:grid;place-items:center;font-size:40px;border:1px solid #fde68a}
+.gate h2{font-size:21px;font-weight:800;margin-bottom:8px}
+.gate p{color:var(--muted);font-size:14px;max-width:430px;margin:0 auto 20px}
+.locked{margin-top:22px;padding:16px;border:1px dashed #fca5a5;border-radius:14px;background:#fff5f5;text-align:start}
+.locked .li{display:flex;gap:10px;align-items:center;padding:8px 0;font-size:13px;color:#7f1d1d;border-bottom:1px dashed #fecaca}
+.locked .li:last-child{border:0}
+.locked .li span.p{background:#fee2e2;color:#b91c1c;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:13px;flex:0 0 auto}
+
+/* ---------- چک‌اوت ---------- */
+.co{display:grid;grid-template-columns:1.55fr .95fr;gap:20px;align-items:start}
+@media(max-width:900px){.co{grid-template-columns:1fr}}
+.sect{border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px;background:#fff}
+.sect>h3{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;padding-bottom:11px;border-bottom:1px solid var(--line)}
+.sect>h3 em{font-style:normal;width:22px;height:22px;border-radius:7px;background:var(--green);color:#fff;font-size:12px;display:grid;place-items:center}
+.linked-pill{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:12px;background:var(--green-l);border:1px solid #bbf7d0;color:#166534;font-size:13px;font-weight:700}
+.summary{position:sticky;top:20px}
+.srow{display:flex;justify-content:space-between;font-size:13.5px;padding:8px 0;color:#475569}
+.srow b{color:var(--ink)}
+.stotal{border-top:1px dashed var(--line);margin-top:8px;padding-top:12px;display:flex;justify-content:space-between;font-size:16px;font-weight:800}
+.stotal span:last-child{color:var(--green-d)}
+.item{display:flex;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:13.5px}
+.item:last-child{border:0}
+.thumb{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#e2e8f0,#f8fafc);display:grid;place-items:center;font-size:19px;flex:0 0 auto;border:1px solid var(--line)}
+.item .nm{flex:1;min-width:0}
+.item .nm small{display:block;color:var(--muted);font-size:11.5px}
+.gates{display:grid;gap:9px}
+.gateopt{display:flex;align-items:center;gap:11px;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-size:13.5px;font-weight:600;transition:.15s}
+.gateopt:hover{border-color:#86efac}
+.gateopt.sel{border-color:var(--green);background:#f0fdf4;box-shadow:0 0 0 3px rgba(22,163,74,.1)}
+.gateopt .glogo{width:30px;height:30px;border-radius:8px;background:#fef3c7;color:#b45309;display:grid;place-items:center;font-size:15px;font-weight:800}
+.radio{width:17px;height:17px;border-radius:50%;border:2px solid #cbd5e1;margin-inline-start:auto;flex:0 0 auto;position:relative}
+.gateopt.sel .radio{border-color:var(--green)}
+.gateopt.sel .radio:after{content:"";position:absolute;inset:2.5px;background:var(--green);border-radius:50%}
+.toggle{display:flex;align-items:center;gap:11px;font-size:13.5px;cursor:pointer;padding:9px 0}
+.sw{width:42px;height:24px;border-radius:99px;background:#cbd5e1;position:relative;transition:.2s;flex:0 0 auto}
+.sw:after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.toggle.on .sw{background:var(--green)}
+.toggle.on .sw:after{inset-inline-start:21px}
+
+/* ---------- پنل مدیریت ---------- */
+.adm{display:grid;grid-template-columns:230px 1fr;gap:18px;align-items:start}
+@media(max-width:900px){.adm{grid-template-columns:1fr}}
+.side{border-radius:var(--r);background:#0f172a;color:#cbd5e1;padding:14px;box-shadow:var(--sh)}
+.side .sb{display:flex;align-items:center;gap:10px;padding:8px 10px 16px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:12px}
+.side .sb b{color:#fff;font-size:14px}
+.side a{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:10px;font-size:13px;color:#94a3b8;text-decoration:none;cursor:pointer;margin-bottom:2px}
+.side a:hover{background:rgba(255,255,255,.05);color:#e2e8f0}
+.side a.on{background:var(--green);color:#fff;font-weight:700}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:var(--sh)}
+.stat .k{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.stat .v{font-size:26px;font-weight:800;margin-top:6px;letter-spacing:-.5px}
+.stat .t{font-size:11.5px;margin-top:3px}
+.up{color:var(--green-d)} .down{color:var(--red)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#f8fafc;color:var(--muted);font-weight:700;font-size:11.5px;text-align:start;padding:11px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+tr:hover td{background:#fcfdff}
+.mono{font-family:Consolas,monospace;direction:ltr;display:inline-block;font-size:12.5px}
+.tabs-mini{display:flex;gap:6px;flex-wrap:wrap}
+.tabs-mini span{padding:5px 12px;border-radius:999px;font-size:12px;background:#f1f5f9;color:var(--muted);cursor:pointer;border:1px solid transparent}
+.tabs-mini span.on{background:var(--green-l);color:var(--green-d);border-color:#bbf7d0;font-weight:700}
+.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.toolbar .input{max-width:230px;padding:9px 12px;font-size:13px}
+.foot{text-align:center;color:var(--soft);font-size:12px;margin-top:34px}
+.kbd{background:#f1f5f9;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 6px;font-family:Consolas,monospace;font-size:11.5px;direction:ltr;display:inline-block}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="logo">⛏️</div>
+      <div>
+        <h1>BazzarMc — پیش‌نمایش طراحی</h1>
+        <p>نمای ثابت (Mockup) از رابط کاربری افزونهٔ وردپرس و جریان اتصال به ماینکرافت</p>
+      </div>
+    </div>
+    <div class="note">
+      این صفحه یک پیش‌نمایش ایستا از طراحی است؛ داده‌ها نمونه‌اند. در محیط واقعی، فونت <b>وزیرمتن</b> از CDN تنظیم‌شده در پنل بارگذاری می‌شود
+      و همهٔ بخش‌ها با ووکامرس، ملی‌پیامک و REST API افزونه کار می‌کنند.
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-t="link">🔗 پنل اتصال کاربر</button>
+    <button class="tab" role="tab" aria-selected="false" data-t="otp">📱 ورود پیامکی</button>
+    <button class="tab" role="tab" aria-selected="false" data-t="gate">🔒 درگاه اتصال</button>
+    <button class="tab" role="tab" aria-selected="false" data-t="checkout">🛒 چک‌اوت اختصاصی</button>
+    <button class="tab" role="tab" aria-selected="false" data-t="admin">⚙️ پنل مدیریت</button>
+  </nav>
+
+  <!-- ============ ۱) پنل اتصال ============ -->
+  <section class="panel active" id="p-link">
+    <div class="card">
+      <div class="card-h">
+        <div>
+          <h2>🔗 اتصال حساب به ماینکرافت</h2>
+          <div class="sub">حساب سایت خود را به نام کاربری سرور متصل کنید تا خریدها خودکار تحویل شوند.</div>
+        </div>
+        <span class="badge b-ok"><span class="dot"></span> متصل</span>
+      </div>
+      <div class="card-b">
+
+        <div class="profile">
+          <div class="avatar">👤</div>
+          <div class="who">
+            <b>علی رضایی</b>
+            <span>۰۹۱۲۳۴۵۶۷۸۹ &nbsp;•&nbsp; ali@example.com &nbsp;•&nbsp; عضویت: ۱۴۰۴/۰۶/۲۱</span>
+          </div>
+          <button class="btn btn-o btn-sm">ویرایش حساب</button>
+        </div>
+
+        <div class="mc-row">
+          <div class="mc-face"></div>
+          <div style="flex:1">
+            <b style="font-size:14px">Notch_King</b>
+            <div style="font-size:12px;color:var(--muted)">متصل‌شده در ۱۴۰۴/۰۶/۲۱ — ۱۲:۳۴ &nbsp;|&nbsp; رتبهٔ سایت: <span class="badge b-info" style="padding:1px 8px">VIP</span></div>
+          </div>
+          <button class="btn btn-g btn-sm">لغو اتصال</button>
+        </div>
+
+        <div class="codebox">
+          <div class="lbl">کد اتصال یک‌بارمصرف</div>
+          <div class="code" id="codeText">7KQ2M9X4</div>
+          <div class="timer" id="bar"><i id="barFill"></i></div>
+          <div class="tmeta">
+            <span>اعتبار باقی‌مانده: <b id="left">۰۴:۳۷</b></span>
+            <span>این کد فقط یک بار قابل استفاده است</span>
+          </div>
+          <div class="code-actions">
+            <button class="btn btn-p" id="copyBtn">📋 کپی کد</button>
+            <button class="btn btn-o" id="newBtn">↻ ساخت کد جدید</button>
+            <button class="btn btn-g" id="revokeBtn">✕ باطل‌کردن</button>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step"><i>۱</i><div>کد بالا را کپی کنید. <b>اعتبار آن ۵ دقیقه</b> است.</div></div>
+          <div class="step"><i>۲</i><div>وارد سرور ماینکرافت شوید: <span class="cmd">mc.storelink.ir</span></div></div>
+          <div class="step"><i>۳</i><div>در چت بازی بنویسید: <span class="cmd">/mclink 7KQ2M9X4</span></div></div>
+          <div class="step"><i>۴</i><div>پیام موفقیت که آمد، خریدهایتان خودکار تحویل می‌شود. 🎉</div></div>
+        </div>
+
+        <div class="divider">یا اتصال با رمز پیامکی</div>
+        <div class="grid2">
+          <div class="field" style="margin:0">
+            <label>نام کاربری ماینکرافت</label>
+            <input class="input" value="Notch_King" dir="ltr">
+          </div>
+          <div class="field" style="margin:0">
+            <label>شمارهٔ موبایل</label>
+            <input class="input" value="۰۹۱۲۳۴۵۶۷۸۹" dir="ltr">
+          </div>
+        </div>
+        <button class="btn btn-o" style="margin-top:14px">📨 دریافت کد تأیید پیامکی</button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ۲) ورود پیامکی ============ -->
+  <section class="panel" id="p-otp">
+    <div class="auth">
+      <div class="card">
+        <div class="card-b">
+          <div class="center">
+            <div class="avatar" style="margin:0 auto 14px;width:58px;height:58px;font-size:26px">📱</div>
+            <h2 style="font-size:19px;font-weight:800">ورود با شمارهٔ موبایل</h2>
+            <p style="color:var(--muted);font-size:13px;margin-top:4px">بدون رمز عبور — فقط یک کد یک‌بارمصرف</p>
+          </div>
+
+          <div style="margin-top:22px">
+            <div class="field">
+              <label>شمارهٔ موبایل</label>
+              <input class="input" dir="ltr" placeholder="09xxxxxxxxx" value="09123456789" style="text-align:center;letter-spacing:1px">
+              <div class="hint">کد تأیید به این شماره پیامک می‌شود.</div>
+            </div>
+            <button class="btn btn-p" style="width:100%">دریافت کد تأیید</button>
+          </div>
+
+          <div class="divider">گام دوم</div>
+
+          <div class="center" style="font-size:13.5px;color:#334155">
+            کد ۵ رقمی ارسال‌شده به <b dir="ltr">۰۹۱۲****۶۷۸۹</b> را وارد کنید
+          </div>
+          <div class="otp">
+            <input value="4" maxlength="1"><input value="8" maxlength="1"><input value="2" maxlength="1"><input value="1" maxlength="1"><input value="" maxlength="1">
+          </div>
+          <div class="resend center">ارسال مجدد کد تا <b>۰۰:۴۷</b> دیگر &nbsp;•&nbsp; <a>تغییر شماره</a></div>
+
+          <button class="btn btn-p" style="width:100%;margin-top:14px">ورود به حساب</button>
+
+          <div class="alert a-info" style="margin-top:16px;font-size:12.5px">
+            <span>ℹ️</span>
+            <div>اگر حساب کاربری با این شماره وجود نداشته باشد، به‌صورت خودکار ساخته می‌شود (قابل تنظیم در پنل).</div>
+          </div>
+
+          <div class="divider">سازگار با</div>
+          <div class="integrations">
+            <span class="badge b-mut">ایزی‌لاگین (Bigersoft)</span>
+            <span class="badge b-mut">Digits</span>
+            <span class="badge b-mut">داروازه</span>
+            <span class="badge b-mut">WP-SMS</span>
+            <span class="badge b-mut">پیامیتو</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ۳) درگاه اتصال ============ -->
+  <section class="panel" id="p-gate">
+    <div class="card">
+      <div class="gate">
+        <div class="icon">🔒</div>
+        <h2>حساب شما هنوز به سرور ماینکرافت متصل نیست</h2>
+        <p>برای خرید و دریافت خودکار آیتم‌ها، ابتدا حساب سایت خود را به نام کاربری ماینکرافت متصل کنید. این کار کمتر از یک دقیقه طول می‌کشد.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-p">🔗 اتصال حساب ماینکرافت</button>
+          <button class="btn btn-o">📖 راهنمای اتصال</button>
+        </div>
+
+        <div class="locked">
+          <div class="li"><span class="p">🔗</span><div>از پنل کاربری یک <b>کد اتصال ۵ دقیقه‌ای</b> بگیرید.</div></div>
+          <div class="li"><span class="p">⛏️</span><div>وارد سرور شوید و در چت بنویسید <span class="cmd">/mclink &lt;کد&gt;</span></div></div>
+          <div class="li"><span class="p">✅</span><div>پس از اتصال، این صفحه باز می‌شود و می‌توانید خرید کنید.</div></div>
+        </div>
+
+        <div class="alert a-warn" style="margin-top:18px;text-align:start">
+          <span>⚠️</span>
+          <div>
+            <b>سبد خرید شما حفظ شده است.</b>
+            ۲ محصول به ارزش <b>۲۴۹٬۰۰۰ تومان</b> در سبد شماست و پس از اتصال، همان‌ها را پرداخت خواهید کرد.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ۴) چک‌اوت ============ -->
+  <section class="panel" id="p-checkout">
+    <div class="co">
+      <div>
+        <div class="card">
+          <div class="card-h">
+            <div>
+              <h2>🛒 تکمیل خرید</h2>
+              <div class="sub">پرداخت امن از طریق درگاه‌های بانکی ایران</div>
+            </div>
+            <span class="badge b-ok"><span class="dot"></span> اتصال ماینکرافت برقرار است</span>
+          </div>
+          <div class="card-b">
+
+            <div class="linked-pill" style="margin-bottom:18px">
+              <span style="font-size:18px">⛏️</span>
+              <div style="flex:1">آیتم‌ها به بازیکن <b dir="ltr" style="margin:0 4px">Notch_King</b> تحویل داده می‌شود.</div>
+              <button class="btn btn-o btn-sm">تغییر</button>
+            </div>
+
+            <div class="sect">
+              <h3><em>۱</em> اطلاعات خریدار</h3>
+              <div class="grid2">
+                <div class="field"><label>نام</label><input class="input" value="علی"></div>
+                <div class="field"><label>نام خانوادگی</label><input class="input" value="رضایی"></div>
+              </div>
+              <div class="grid2">
+                <div class="field"><label>شمارهٔ موبایل</label><input class="input" dir="ltr" value="09123456789"></div>
+                <div class="field"><label>ایمیل</label><input class="input" dir="ltr" value="ali@example.com"></div>
+              </div>
+            </div>
+
+            <div class="sect">
+              <h3><em>۲</em> اطلاعات ماینکرافت</h3>
+              <label class="toggle on" id="giftT"><span class="sw"></span> این خرید هدیه است (برای یک بازیکن دیگر)</label>
+              <div class="field" style="margin-top:12px">
+                <label>نام کاربری دریافت‌کننده</label>
+                <input class="input" dir="ltr" value="Notch_King">
+                <div class="hint">باید قبلاً به یک حساب سایت متصل شده باشد.</div>
+              </div>
+            </div>
+
+            <div class="sect">
+              <h3><em>۳</em> کد تخفیف</h3>
+              <div style="display:flex;gap:9px">
+                <input class="input" dir="ltr" placeholder="MINE20" style="flex:1">
+                <button class="btn btn-o">اعمال</button>
+              </div>
+            </div>
+
+            <div class="sect" style="margin-bottom:0">
+              <h3><em>۴</em> روش پرداخت</h3>
+              <div class="gates">
+                <label class="gateopt sel"><span class="glogo">ZP</span> درگاه زرین‌پال <small style="color:var(--muted);font-weight:400;margin-inline-start:6px">پرداخت آنلاین با همهٔ کارت‌های عضو شتاب</small><span class="radio"></span></label>
+                <label class="gateopt"><span class="glogo">IDP</span> درگاه آی‌دی‌پی <span class="radio"></span></label>
+                <label class="gateopt"><span class="glogo" style="background:#e0e7ff;color:#4338ca">🏦</span> کارت‌به‌کارت <small style="color:var(--muted);font-weight:400;margin-inline-start:6px">ثبت دستی فیش</small><span class="radio"></span></label>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <aside class="card summary">
+        <div class="card-h"><h2 style="font-size:15px">خلاصهٔ سفارش</h2><span class="badge b-mut">۲ قلم</span></div>
+        <div class="card-b">
+          <div class="item">
+            <div class="thumb">💎</div>
+            <div class="nm">رتبهٔ VIP<small>تحویل: دستور کنسول + رتبهٔ سایت</small></div>
+            <b>۱۴۹٬۰۰۰</b>
+          </div>
+          <div class="item">
+            <div class="thumb">🗝️</div>
+            <div class="nm">کلید صندوقچه ×۳<small>تحویل: ۳ آیتم در اینونتوری</small></div>
+            <b>۱۰۰٬۰۰۰</b>
+          </div>
+
+          <div style="margin-top:14px">
+            <div class="srow"><span>جمع سبد</span><b>۲۴۹٬۰۰۰ تومان</b></div>
+            <div class="srow"><span>تخفیف</span><b style="color:var(--red)">− ۲۰٬۰۰۰ تومان</b></div>
+            <div class="srow"><span>مالیات</span><b>۰ تومان</b></div>
+            <div class="stotal"><span>مبلغ قابل پرداخت</span><span>۲۲۹٬۰۰۰ تومان</span></div>
+          </div>
+
+          <button class="btn btn-p" style="width:100%;margin-top:18px;padding:14px">پرداخت و تکمیل سفارش ←</button>
+
+          <div class="alert a-ok" style="margin-top:14px;font-size:12px">
+            <span>🔐</span><div>پرداخت از طریق درگاه امن بانکی انجام می‌شود و آیتم‌ها بلافاصله پس از تأیید، در صف تحویل قرار می‌گیرند.</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ ۵) پنل مدیریت ============ -->
+  <section class="panel" id="p-admin">
+    <div class="adm">
+      <div class="side">
+        <div class="sb"><div class="logo" style="width:34px;height:34px;font-size:17px;border-radius:10px">⛏️</div><b>BazzarMc IR</b></div>
+        <a class="on">📊 داشبورد</a>
+        <a>🔗 اتصال سرور</a>
+        <a>📦 محصولات</a>
+        <a>🚚 صف تحویل‌ها <span style="margin-inline-start:auto;background:rgba(255,255,255,.16);border-radius:99px;padding:0 7px;font-size:11px">۴</span></a>
+        <a>📱 پیامک</a>
+        <a>🔐 ورود</a>
+        <a>🛒 چک‌اوت</a>
+        <a>💬 پیام‌ها</a>
+        <a>🧰 ابزارها</a>
+      </div>
+
+      <div>
+        <div class="stats">
+          <div class="stat"><div class="k">👥 کاربران متصل</div><div class="v">۱٬۲۴۸</div><div class="t up">▲ ۱۲٪ این هفته</div></div>
+          <div class="stat"><div class="k">🛍️ سفارش‌های تحویل‌شده</div><div class="v">۳٬۹۰۲</div><div class="t up">▲ ۸٪ این هفته</div></div>
+          <div class="stat"><div class="k">⏳ در صف تحویل</div><div class="v">۴</div><div class="t">نیاز به بررسی</div></div>
+          <div class="stat"><div class="k">📱 پیامک‌های امروز</div><div class="v">۸۷</div><div class="t down">موجودی: ۱۲٬۴۰۰</div></div>
+        </div>
+
+        <div class="card" style="margin-bottom:18px">
+          <div class="card-h">
+            <div><h2>🚚 صف تحویل‌ها</h2><div class="sub">۱۴۰۴/۰۶/۲۱ — به‌روزرسانی خودکار هر ۴۵ ثانیه توسط پلاگین سرور</div></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-o btn-sm">⬇ خروجی CSV</button>
+              <button class="btn btn-p btn-sm">⟳ اجرای زمان‌بند</button>
+            </div>
+          </div>
+          <div class="card-b" style="padding-top:14px">
+            <div class="toolbar">
+              <div class="tabs-mini">
+                <span class="on">در انتظار (۴)</span><span>تحویل‌شده</span><span>ناموفق</span><span>منقضی</span><span>همه</span>
+              </div>
+              <input class="input" placeholder="🔍 جست‌وجوی بازیکن یا شمارهٔ سفارش…" style="margin-inline-start:auto">
+            </div>
+            <div style="overflow-x:auto">
+              <table>
+                <thead><tr><th>#</th><th>سفارش</th><th>بازیکن</th><th>محصول</th><th>تعداد</th><th>تاریخ (شمسی)</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+                <tbody>
+                  <tr><td class="mono">18</td><td class="mono">#1042</td><td><b>Notch_King</b></td><td>vip</td><td>۱</td><td>۱۴۰۴/۰۶/۲۱ ۱۲:۳۴</td><td><span class="badge b-warn">در انتظار</span></td><td><button class="btn btn-o btn-sm">تحویل دستی</button></td></tr>
+                  <tr><td class="mono">17</td><td class="mono">#1041</td><td><b>Steve_IR</b></td><td>crate key</td><td>۳</td><td>۱۴۰۴/۰۶/۲۱ ۱۱:۰۲</td><td><span class="badge b-warn">در انتظار</span></td><td><button class="btn btn-o btn-sm">تحویل دستی</button></td></tr>
+                  <tr><td class="mono">16</td><td class="mono">#1040</td><td><b>Alex_2024</b></td><td>64 diamond</td><td>۲</td><td>۱۴۰۴/۰۶/۲۰ ۲۲:۱۸</td><td><span class="badge b-ok">تحویل‌شده</span></td><td><button class="btn btn-g btn-sm">بازگرداندن به صف</button></td></tr>
+                  <tr><td class="mono">15</td><td class="mono">#1039</td><td><b>—</b></td><td>vip+</td><td>۱</td><td>۱۴۰۴/۰۶/۲۰ ۱۹:۴۰</td><td><span class="badge b-red">ناموفق</span></td><td><button class="btn btn-g btn-sm">حذف</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="card-h"><h2 style="font-size:14.5px">📱 پیامک (ملی‌پیامک)</h2><span class="badge b-ok"><span class="dot"></span> آماده</span></div>
+            <div class="card-b">
+              <div class="field"><label>نام کاربری پنل</label><input class="input" dir="ltr" value="09123456789"></div>
+              <div class="field"><label>شمارهٔ ارسال‌کننده (from)</label><input class="input" dir="ltr" value="50004000"></div>
+              <div class="field"><label>روش ارسال</label>
+                <select class="input"><option>سرویس کد یک‌بارمصرف (SendOtp)</option><option selected>الگو / پترن (BaseServiceNumber)</option><option>متن ساده (SendSMS)</option></select>
+              </div>
+              <div style="display:flex;gap:8px"><button class="btn btn-p btn-sm">ذخیرهٔ تنظیمات</button><button class="btn btn-o btn-sm">✉ ارسال پیامک آزمایشی</button></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-h"><h2 style="font-size:14.5px">🧰 ابزارها و سلامت سیستم</h2></div>
+            <div class="card-b">
+              <div class="alert a-ok" style="margin-bottom:10px"><span>✅</span><div>جدول‌های دیتابیس سالم‌اند (نسخهٔ ۱.۰.۰).</div></div>
+              <div class="alert a-ok" style="margin-bottom:10px"><span>✅</span><div>آخرین اجرای زمان‌بند: ۱۲ دقیقه پیش.</div></div>
+              <div class="alert a-warn" style="margin-bottom:16px"><span>⚠️</span><div>۳ کاربر شمارهٔ موبایل ندارند — ابزار «همگام‌سازی شماره‌ها» را اجرا کنید.</div></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-o btn-sm">📄 ساخت برگه‌ها</button>
+                <button class="btn btn-o btn-sm">🔎 شناسایی کلیدهای موبایل</button>
+                <button class="btn btn-o btn-sm">🔄 مهاجرت از نسخهٔ قدیمی</button>
+                <button class="btn btn-g btn-sm">🗑 پاک‌کردن لاگ‌ها</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    BazzarMc ۱.۰.۰ &nbsp;•&nbsp; GPL-2.0-or-later &nbsp;•&nbsp; پیش‌نمایش طراحی (بدون دادهٔ واقعی)<br>
+    میان‌برها: <span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span> <span class="kbd">4</span> <span class="kbd">5</span> برای جابه‌جایی بین نماها
+  </div>
+</div>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel'),keys=['link','otp','gate','checkout','admin'];
+  function show(t){
+    tabs.forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.t===t));});
+    panels.forEach(function(p){p.classList.toggle('active',p.id==='p-'+t);});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  tabs.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.t);});});
+  document.addEventListener('keydown',function(e){
+    var i=keys.indexOf(e.key); if(i>-1){show(keys[i]);}
+  });
+
+  /* شمارش معکوس کد اتصال */
+  var total=300,left=277,fill=document.getElementById('barFill'),bar=document.getElementById('bar'),lbl=document.getElementById('left');
+  function fa(n){return String(n).replace(/\d/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'[d];});}
+  function pad(n){return n<10?'0'+n:''+n;}
+  function tick(){
+    if(left<=0){return;}
+    left--;
+    var pct=Math.max(0,(left/total)*100);
+    fill.style.width=pct+'%';
+    bar.classList.toggle('low',pct<25);
+    lbl.textContent=fa(pad(Math.floor(left/60))+':'+pad(left%60));
+  }
+  setInterval(tick,1000);
+
+  /* دکمه‌های کد */
+  var codeText=document.getElementById('codeText');
+  function randomCode(){
+    var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='';
+    for(var i=0;i<8;i++){s+=c[Math.floor(Math.random()*c.length)];}
+    return s;
+  }
+  document.getElementById('copyBtn').addEventListener('click',function(){
+    var b=this,txt=codeText.textContent;
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).catch(function(){});}
+    b.textContent='✓ کپی شد!';setTimeout(function(){b.textContent='📋 کپی کد';},1600);
+  });
+  document.getElementById('newBtn').addEventListener('click',function(){
+    codeText.textContent=randomCode();left=total;fill.style.width='100%';bar.classList.remove('low');
+    lbl.textContent=fa('05:00');
+    document.querySelectorAll('.step .cmd')[1].textContent='/mclink '+codeText.textContent;
+  });
+  document.getElementById('revokeBtn').addEventListener('click',function(){
+    codeText.textContent='کد باطل شد';codeText.classList.add('empty');
+    left=0;fill.style.width='0%';lbl.textContent=fa('00:00');
+  });
+
+  /* سوئیچ‌ها و درگاه‌ها */
+  document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on');});});
+  document.querySelectorAll('.gateopt').forEach(function(g){
+    g.addEventListener('click',function(){
+      g.parentNode.querySelectorAll('.gateopt').forEach(function(x){x.classList.remove('sel');});
+      g.classList.add('sel');
+    });
+  });
+
+  /* ورودی‌های OTP */
+  var otp=document.querySelectorAll('.otp input');
+  otp.forEach(function(inp,i){
+    inp.addEventListener('input',function(){
+      inp.value=inp.value.replace(/[^\d۰-۹]/g,'').slice(0,1);
+      if(inp.value&&i<otp.length-1){otp[i+1].focus();}
+    });
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='Backspace'&&!inp.value&&i>0){otp[i-1].focus();}
+    });
+  });
+})();
+</script>
+</body>
+</html>
