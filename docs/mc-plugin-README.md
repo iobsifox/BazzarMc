@@ -4,7 +4,7 @@
 کد اتصال از پنل کاربری، اتصال با رمز یک‌بارمصرف ایمیلی از داخل بازی، تحویل خودکار آیتم‌ها/دستورها پس از پرداخت،
 **منوی دریافت آیتم با کد خرید (GUI)**، **تعریف و همگام‌سازی رنک‌ها با سایت** و **یادآوری آیتم‌های تحویل‌گرفته‌نشده**.
 
-* خروجی آماده: `../dist/BazzarMC-1.3.0.jar`
+* خروجی آماده: `../dist/BazzarMC-1.4.0.jar`
 * سازگاری: Spigot / Paper / Purpur — نسخهٔ **1.16 تا 1.21**
 * جاوا: بایت‌کد **Java 8** → روی سرورهای Java 8 تا Java 21 اجرا می‌شود
 * وابستگی‌ها: `spigot-api` و `gson` با scope=provided (jar نهایی سبک و بدون shade)
@@ -16,7 +16,7 @@
 
 ```bash
 # ۱) کپی در پوشهٔ plugins
-cp ../dist/BazzarMC-1.3.0.jar /path/to/server/plugins/
+cp ../dist/BazzarMC-1.4.0.jar /path/to/server/plugins/
 
 # ۲) اجرای سرور (config.yml ساخته می‌شود)
 # ۳) ویرایش plugins/BazzarMC/config.yml
@@ -316,7 +316,7 @@ message: "&#00ff88متن سبز نئونی!"
 
 ```bash
 mvn clean package
-# → target/BazzarMC-1.3.0.jar
+# → target/BazzarMC-1.4.0.jar
 ```
 
 با JDK/Maven دانلودشده در مسیر دیگر:

@@ -6,7 +6,8 @@
 2. **AJAX داخلی** (برای اسکریپت‌های سمت کاربر سایت)
 3. **مسیرهای سازگار با نسخهٔ قدیمی** (`storelinkformc/v1`)
 4. **توابع عمومی PHP و شورت‌کدها** (برای قالب و صفحه‌سازها)
-5. **ویجت‌های المنتور** (۱۱ ویجت برای طراحی صفحهٔ حساب کاربری)
+5. **ویجت‌های المنتور** (۱۲ ویجت برای طراحی فروشگاه و صفحهٔ حساب کاربری)
+6. **فرم‌ساز دلخواه و محافظ پایداری** (جدید در ۱.۴.۰)
 
 ---
 
@@ -42,7 +43,7 @@ https://yoursite.com/wp-json/bazzarmc/v1
 {
   "success": true,
   "plugin": "BazzarMc",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "time": "2026-09-12 10:24:33",
   "site": "فروشگاه ماینکرافت من",
   "verify": [ "dashboard", "email" ]
@@ -263,7 +264,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
   ],
   "ranks": [ { "key": "vip", "name": "رتبهٔ VIP", "level": 1, "role": "vip", "days": 30 } ],
   "status": { "enabled": true, "hide_lower": true, "definitions": 3, "manual": 2, "synced_at": 1788000000, "reported_at": 1788003600 },
-  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.3.0" }
+  "store": { "name": "سرور ماینکرافت", "url": "https://yoursite.com/", "version": "1.4.0" }
 }
 ```
 
@@ -542,7 +543,7 @@ api.redeemCode(player.getName(), uuid, "7KQ2M9")
 
 ## ۹) ویجت‌های المنتور
 
-اگر المنتور (نسخهٔ ۳.۱ یا جدیدتر) فعال باشد، ۱۱ ویجت در دستهٔ **«BazzarMc — فروشگاه ماینکرافت»** ثبت می‌شود:
+اگر المنتور (نسخهٔ ۳.۱ یا جدیدتر) فعال باشد، ۱۲ ویجت در دستهٔ **«BazzarMc — فروشگاه ماینکرافت»** ثبت می‌شود:
 
 | نام ویجت (name) | عنوان در پنل |
 |---|---|
@@ -553,6 +554,7 @@ api.redeemCode(player.getName(), uuid, "7KQ2M9")
 | `bmc-account-content` | محتوای حساب کاربری |
 | `bmc-cart` | سبد خرید اختصاصی |
 | `bmc-checkout` | چک‌اوت اختصاصی |
+| `bmc-form` | فرم دلخواه (فرم‌ساز) |
 | `bmc-tickets` | تیکت‌های پشتیبانی |
 | `bmc-ticket` | گفت‌وگوی تیکت |
 | `bmc-deliveries` | تحویل‌های من |
@@ -562,3 +564,90 @@ api.redeemCode(player.getName(), uuid, "7KQ2M9")
 * کلید تنظیمات: `elementor_enabled` (پیش‌فرض روشن) — بخش «یکپارچه‌سازی المنتور» در تب **ابزارها**
 * دارایی‌ها: `bmc-public`، `bmc-elementor` (و `bmc-vazir` اگر CDN فونت روشن باشد) به‌صورت `get_style_depends()` و `bmc-icons`/`bmc-link`/`bmc-checkout` به‌صورت `get_script_depends()`
 * **بدون المنتور**: هیچ کلاسی بارگذاری نمی‌شود (`did_action('elementor/loaded')` بررسی می‌شود) و افزونه هیچ خطا یا هشداری تولید نمی‌کند.
+
+---
+
+## ۱۰) فرم‌ساز دلخواه (جدید در ۱.۴.۰)
+
+### شورت‌کد
+
+```text
+[bazzarmc_form id="3"]
+[bazzarmc_form slug="contact"]
+[bazzarmc_form title="درخواست رنک" submit="ثبت درخواست"]
+[bazzarmc_form theme="light" accent="#3ddc84"]
+```
+
+اگر `id`/`slug` داده نشود، نخستین فرم فعال نمایش داده می‌شود.
+
+### ارسال فرم
+
+| مسیر | توضیح |
+|---|---|
+| `POST admin-ajax.php` با `action=bmc_form_submit` | مسیر اصلی (هم برای کاربر واردشده و هم مهمان) |
+| `POST admin-post.php` با `action=bmc_form_submit` | مسیر جایگزین وقتی JavaScript خاموش است؛ کاربر با پارامترهای `bmc_form`, `bmc_form_ok`, `bmc_form_error` به همان صفحه برمی‌گردد |
+
+پارامترهای اجباری: `bmc_form_id` (شناسهٔ فرم)، `bmc_form_nonce` (nonce با کلید `bmc_form_{id}`)، و مقدار فیلدها در آرایهٔ `bmc_f[field_id]`. فایل‌ها در `$_FILES['bmc_form_files']` ارسال می‌شوند. فیلد تلهٔ ضدربات `bmc_hp` باید خالی بماند.
+
+پاسخ AJAX:
+
+```json
+{
+  "success": true,
+  "data": { "ok": true, "message": "درخواست شما ثبت شد.", "redirect": "", "entry_id": 42 }
+}
+```
+
+### جدول‌ها
+
+| جدول | محتوا |
+|---|---|
+| `{prefix}bmc_forms` | تعریف فرم‌ها (`config` به‌صورت JSON: فیلدها، عملیات، ظاهر) |
+| `{prefix}bmc_form_entries` | ورودی‌های ارسال‌شده (`data`, `files`, `status`, `note`, `ip_hash`, `agent`, `referer`) |
+
+### کلیدهای تنظیمات
+
+`forms_enabled`, `forms_rate_limit`, `forms_max_per_day`, `forms_honeypot`, `forms_allow_files`, `forms_max_file_size`, `forms_notice_email`, `forms_success_message`, `forms_error_message`
+
+### توابع عمومی
+
+| تابع | کاربرد |
+|---|---|
+| `BMC_Forms::render( $form, $overrides )` | رندر یک فرم با شناسه، نامک یا آرایهٔ پیکربندی |
+| `BMC_Forms::shortcode( $atts )` | هندلر `[bazzarmc_form]` |
+| `BMC_Forms::all( $status )` / `choices()` / `get( $id_or_slug )` | خواندن فرم‌ها |
+| `BMC_Forms::create( $args )` / `update( $id, $args )` / `duplicate( $id )` / `delete( $id )` | مدیریت فرم‌ها |
+| `BMC_Forms::entries_query( $form_id, $args )` / `entry( $id )` / `set_entry_status()` / `delete_entry()` | ورودی‌ها |
+| `BMC_Forms::counts( $form_id )` / `needs_attention()` | شمارنده‌ها (badge منوی مدیریت) |
+| `BMC_Forms::export_rows( $form_id )` | دادهٔ خروجی CSV |
+
+فیلترها: `bmc_form_config`, `bmc_form_fields_render`, `bmc_form_entry_data`, `bmc_form_actions`, `bmc_form_email_headers`.
+
+---
+
+## ۱۱) محافظ پایداری و حالت ایمن (جدید در ۱.۴.۰)
+
+کلاس `BMC_Safe` (`includes/class-bmc-safe.php`) سه کار انجام می‌دهد:
+
+1. **پایش خطاهای مهلک** — در `register_shutdown_function` هر خطای مهلکی که فایلش زیر `BMC_PATH` باشد یا پیامش `BMC_`/`bazzarmc`/`bmc_` داشته باشد شمرده می‌شود. اگر در بازهٔ ۱۰ دقیقه تعداد خطاها به `safe_crash_limit` (پیش‌فرض ۲) برسد، حالت ایمن به‌صورت خودکار فعال می‌شود، تنظیمات به حالت سازگار برمی‌گردد و یک ایمیل به `safe_notify_email` (پیش‌فرض: مدیر سایت) ارسال می‌شود.
+2. **مهار خطاها** — `BMC_Safe::guard( $label, callable $callback, $fallback )` هر بخش پرخطر را در `try/catch` اجرا می‌کند و در صورت خطا، خروجی جایگزین برمی‌گرداند (رندر چک‌اوت، سبد، فرم‌ها، ویجت‌های المنتور، کارت داشبورد).
+3. **حالت ایمن** — در این حالت ویجت‌های المنتور ثبت نمی‌شوند، چک‌اوت/سبد اختصاصی به قالب کلاسیک ووکامرس برمی‌گردند، کارت داشبورد خاموش می‌شود و شورت‌کدها فقط به مدیر یک جعبهٔ اطلاع نشان می‌دهند. سایت هرگز صفحهٔ سفید نمی‌شود.
+
+| تابع | کاربرد |
+|---|---|
+| `BMC_Safe::safe_mode()` | آیا حالت ایمن فعال است |
+| `BMC_Safe::safe_mode_reason()` | دلیل فعال‌شدن |
+| `BMC_Safe::activate( 'on' )` / `activate( 'auto' )` / `deactivate()` | فعال/غیرفعال‌کردن دستی |
+| `BMC_Safe::recover()` | بازگردانی تنظیمات به حالت سازگار (المنتور/چک‌اوت/سبد/کارت خاموش) |
+| `BMC_Safe::reset()` | صفرکردن شمارندهٔ خطا |
+| `BMC_Safe::health()` | آرایهٔ بررسی‌های سلامت (هر ردیف: `label`, `status` یکی از `ok`, `warn`, `fail`, `info`, `detail`) |
+| `BMC_Safe::errors()` | خطاهای مهارشدهٔ درخواست جاری |
+| `BMC_Safe::guard( $label, $callback, $fallback )` | اجرای محافظت‌شده |
+
+کلیدهای تنظیمات: `safe_mode` (یکی از `off`, `on`, `auto`), `safe_guard`, `safe_autorecover`, `safe_crash_limit`, `safe_notify_email`, `safe_debug_display`.
+
+راه‌های دیگر فعال‌سازی: ثابت `BMC_SAFE_MODE` در `wp-config.php` و پارامتر `?bmc_safe=1` (فقط برای کاربر دارای دسترسی `manage_woocommerce`) و `?bmc_safe=0` برای خروج موقت.
+
+AJAX مدیریت (nonce `bmc_admin`): `run_health`, `safe_on`, `safe_off`, `safe_recover`, `clear_crash`.
+
+خطاهای بارگذاری ماژول‌ها در گزینهٔ `bmc_bootstrap_errors` ذخیره می‌شود و در **ابزارها ← محافظ پایداری** نمایش داده می‌شود.
