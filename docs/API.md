@@ -43,7 +43,7 @@ https://yoursite.com/wp-json/bazzarmc/v1
   "version": "1.2.0",
   "time": "2026-09-12 10:24:33",
   "site": "فروشگاه ماینکرافت من",
-  "sms": true
+  "verify": [ "dashboard", "email" ]
 }
 ```
 
@@ -103,9 +103,8 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 | پارامتر | نوع | الزامی | توضیح |
 |---|---|---|---|
 | `player` | string | بله | نام کاربری ماینکرافت |
-| `mobile` | string | یکی از دو | شمارهٔ موبایل (مثل `09123456789`) |
-| `email` | string | یکی از دو | ایمیل کاربر |
-| `channel` | string | – | روش تحویل کد: `sms` (پیش‌فرض)، `email` یا `dashboard` — روش «داشبورد» کد را در پاسخ برمی‌گرداند و هزینهٔ پیامکی ندارد |
+| `email` | string | بله | ایمیل حساب کاربری سایت |
+| `channel` | string | – | روش تحویل کد: `dashboard` (پیش‌فرض — کد در پاسخ برمی‌گردد و در پنل کاربری و ویجت پیشخوان نمایش داده می‌شود) یا `email` |
 
 **پاسخ موفق**
 
@@ -113,12 +112,12 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 {
   "success": true,
   "message": "کد تأیید ارسال شد.",
-  "channel": "mobile",
+  "channel": "email",
   "expires_in": 120
 }
 ```
 
-خطاها: `DISABLED` (روش غیرفعال)، `RATE` (محدودیت نرخ)، `FORMAT` (شماره/ایمیل نامعتبر یا حساب یافت نشد)، `SMS` (خطای سرویس پیامک).
+خطاها: `DISABLED` (روش غیرفعال)، `RATE` (محدودیت نرخ)، `FORMAT` (ایمیل نامعتبر یا حساب یافت نشد)، `SEND_FAIL` (خطای ارسال ایمیل)، `CHANNEL` (هیچ روش تأییدی در دسترس نیست)، `NO_USER`، `ALREADY_LINKED`، `PLAYER_TAKEN`.
 
 ---
 
@@ -128,9 +127,7 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 |---|---|---|---|
 | `player` | string | بله | نام کاربری ماینکرافت |
 | `code` | string | بله | کد دریافتی |
-| `mobile` | string | یکی از دو | همان شماره‌ای که کد برایش ارسال شد |
-| `email` | string | یکی از دو | همان ایمیلی که کد برایش ارسال شد |
-| `channel` | string | – | همان روشی که کد با آن صادر شد (`sms`/`email`/`dashboard`) |
+| `email` | string | بله | همان ایمیلی که کد برایش صادر شد |
 
 ```json
 { "success": true, "message": "اکانت شما متصل شد!", "player": "Notch" }
@@ -395,8 +392,8 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 | `bmc_code_state` | – | بازیابی کد فعال (پس از رفرش صفحه) |
 | `bmc_revoke_code` | – | باطل‌کردن کد فعال |
 | `bmc_unlink` | – | لغو اتصال حساب |
-| `bmc_request_link_otp` | `identifier_type`, `mobile` | درخواست کد اتصال از داخل سایت |
-| `bmc_verify_link_otp` | `identifier_type`, `mobile`, `code` | تأیید و اتصال |
+| `bmc_request_link_otp` | `channel`, `player` | درخواست کد اتصال از داخل سایت (ایمیل حساب کاربر یا نمایش در داشبورد) |
+| `bmc_verify_link_otp` | `code` | تأیید و اتصال |
 
 ### چک‌اوت اختصاصی (nonce: `bmc_public`)
 
@@ -420,7 +417,7 @@ security = <nonce woocommerce-process_checkout>
 | `do` | کار |
 |---|---|
 | `regenerate_token` | ساخت توکن API جدید |
-| `test_sms` | ارسال پیامک آزمایشی |
+| `test_email` | ارسال ایمیل آزمایشی (کد نمونه) |
 | `ping_api` | تست اتصال REST |
 | `run_cron` | اجرای دستی زمان‌بند نگهداری |
 | `clear_logs` | پاک‌کردن لاگ‌ها |
@@ -458,11 +455,11 @@ curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
   -d '{"code":"7KQ2M9","player":"Notch"}' "$BASE/link/redeem"
 
-# اتصال با رمز پیامکی (برای لینک‌کردن اکانت)
+# اتصال با رمز یک‌بارمصرف (ایمیل یا داشبورد) — برای لینک‏کردن اکانت
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
-  -d '{"player":"Notch","mobile":"09123456789"}' "$BASE/link/request"
+  -d '{"player":"Notch","email":"user@example.com","channel":"email"}' "$BASE/link/request"
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
-  -d '{"player":"Notch","mobile":"09123456789","code":"12345"}' "$BASE/link/verify"
+  -d '{"player":"Notch","email":"user@example.com","code":"12345"}' "$BASE/link/verify"
 
 # فهرست محصولات سایت
 curl -sS -H "X-BMC-Token: $TOKEN" "$BASE/products?limit=100"
