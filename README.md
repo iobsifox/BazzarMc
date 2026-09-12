@@ -4,7 +4,7 @@
 
 سبد خرید و صفحهٔ پرداخت اختصاصی فارسی، ورود با رمز یک‌بارمصرف (داشبورد / ایمیل / پیامک)، کد اتصال ۵ دقیقه‌ای، تحویل خودکار آیتم‌ها و رتبه‌ها در بازی.
 
-> توسعه‌دهنده: **Obsifox Studio** — پروانه: **GPL-2.0-or-later** — نسخهٔ **1.0.0**
+> توسعه‌دهنده: **Obsifox Studio** — پروانه: **GPL-2.0-or-later** — نسخهٔ **1.1.0**
 
 این مخزن عمومی فقط **خروجی‌های آمادهٔ نصب** و مستندات را منتشر می‌کند (مخزن سورس، خصوصی است).
 
@@ -14,8 +14,8 @@
 
 | فایل | چیست | از کجا |
 |---|---|---|
-| `bazzarmc-1.0.0.zip` | افزونهٔ وردپرس | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`release/bazzarmc-1.0.0.zip`](release/bazzarmc-1.0.0.zip) |
-| `BazzarMC-1.0.0.jar` | پلاگین ماینکرافت (Spigot / Paper / Purpur) | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`release/BazzarMC-1.0.0.jar`](release/BazzarMC-1.0.0.jar) |
+| `bazzarmc-1.1.0.zip` | افزونهٔ وردپرس | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`release/bazzarmc-1.1.0.zip`](release/bazzarmc-1.1.0.zip) |
+| `BazzarMC-1.1.0.jar` | پلاگین ماینکرافت (Spigot / Paper / Purpur) | [Releases](https://github.com/iobsifox/BazzarMc/releases/latest) یا [`release/BazzarMC-1.1.0.jar`](release/BazzarMC-1.1.0.jar) |
 | `design-preview.html` | پیش‌نمایش ثابتِ همهٔ نماهای رابط کاربری | بازکردن در مرورگر |
 
 **نیازمندی‌ها**
@@ -32,7 +32,7 @@
 
 **۱) افزونهٔ وردپرس**
 
-پیشخوان ← افزونه‌ها ← افزودن ← بارگذاری افزونه ← فایل `bazzarmc-1.0.0.zip` ← فعال‌سازی.
+پیشخوان ← افزونه‌ها ← افزودن ← بارگذاری افزونه ← فایل `bazzarmc-1.1.0.zip` ← فعال‌سازی.
 
 **۲) تنظیم توکن و سرور**
 
@@ -41,7 +41,7 @@
 **۳) پلاگین ماینکرافت**
 
 ```bash
-cp BazzarMC-1.0.0.jar /path/to/server/plugins/
+cp BazzarMC-1.1.0.jar /path/to/server/plugins/
 # یک‌بار سرور را اجرا کنید تا plugins/BazzarMC/config.yml ساخته شود
 ```
 

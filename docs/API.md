@@ -40,7 +40,7 @@ https://yoursite.com/wp-json/bazzarmc/v1
 {
   "success": true,
   "plugin": "BazzarMc",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "time": "2026-09-12 10:24:33",
   "site": "فروشگاه ماینکرافت من",
   "sms": true

@@ -14,7 +14,7 @@
 خروجی نهایی:
 
 * افزونهٔ وردپرس → پوشهٔ `wp-plugin/bazzarmc/` را zip کنید (یا مستقیم در `wp-content/plugins/` بگذارید).
-* پلاگین ماینکرافت → `dist/BazzarMC-1.0.0.jar`
+* پلاگین ماینکرافت → `dist/BazzarMC-1.1.0.jar`
 
 ---
 
@@ -158,7 +158,7 @@ add_filter( 'bmc_sms_send_text', function ( $result, $to, $text, $code, $force_t
 
 ```bash
 # ۱) فایل jar را در پوشهٔ plugins سرور بگذارید
-cp dist/BazzarMC-1.0.0.jar /path/to/server/plugins/
+cp dist/BazzarMC-1.1.0.jar /path/to/server/plugins/
 
 # ۲) سرور را یک‌بار ری‌استارت کنید تا config.yml ساخته شود
 # ۳) فایل plugins/BazzarMC/config.yml را ویرایش کنید:
@@ -246,7 +246,7 @@ bazzarmc/
 │   ├── pom.xml
 │   ├── README.md
 │   └── src/main/{java,resources}/
-├── dist/BazzarMC-1.0.0.jar       ← خروجی آمادهٔ نصب
+├── dist/BazzarMC-1.1.0.jar       ← خروجی آمادهٔ نصب
 └── docs/{README-fa.md, API.md}
 ```
 
@@ -259,7 +259,7 @@ bazzarmc/
 ```bash
 cd mc-plugin
 mvn clean package
-# خروجی: target/BazzarMC-1.0.0.jar
+# خروجی: target/BazzarMC-1.1.0.jar
 ```
 
 اگر Maven ندارید:
