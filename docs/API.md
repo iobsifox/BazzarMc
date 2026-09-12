@@ -124,19 +124,33 @@ curl -X POST https://yoursite.com/wp-json/bazzarmc/v1/link/redeem \
 
 ---
 
-### `POST /link/verify` — تأیید رمز و اتصال حساب
+### `POST /link/verify` — تأیید رمز و اتصال حساب (یکپارچه از ۱.۸.۰)
+
+این اندپوینت از ۱.۸.۰ **هر دو نوع کد** را می‌پذیرد: کد پنل کاربری سایت (نوع `link`) و رمز یک‌بارمصرف ایمیلی (نوع `otp_link`).
+ترتیب بررسی: نخست کد پنل با شناسهٔ کاربر/ایمیل، سپس رمز ایمیلی. در پاسخ، `source` نشان می‌دهد کد از کدام کانال پذیرفته شده است.
 
 | پارامتر | نوع | الزامی | توضیح |
 |---|---|---|---|
-| `player` | string | بله | نام کاربری ماینکرافت |
-| `code` | string | بله | کد دریافتی |
-| `email` | string | بله | همان ایمیلی که کد برایش صادر شد |
+| `player` | string | – | نام کاربری ماینکرافت (اگر `uuid` نباشد، برای یافتن حساب لازم است) |
+| `code` | string | بله | کد دریافتی (از پنل کاربری یا ایمیل) |
+| `email` | string | – | ایمیل حساب؛ برای یافتن کاربر هنگام نبود `uuid` |
+| `uuid` | string | – | **جدید در ۱.۸.۰** — UUID بازیکن؛ اگر حسابی قبلاً با همین UUID متصل شده باشد، شناسایی دقیق‌تر است |
 
 ```json
-{ "success": true, "message": "اکانت شما متصل شد!", "player": "Notch" }
+{
+  "success": true,
+  "message": "اکانت شما متصل شد!",
+  "player": "Notch",
+  "uuid": "069a79f444e94726a5befca90e38aaf5",
+  "source": "email"
+}
 ```
 
-خطاها: `RATE` (۲۰ تلاش در هر IP)، `FORMAT`، `INVALID` (کد اشتباه/منقضی)، `ATTEMPTS` (بیش از حد مجاز تلاش).
+`source` یکی از `panel` (کد پنل کاربری) یا `email` (رمز ایمیلی) است.
+
+خطاها: `RATE` (۲۰ تلاش در هر IP)، `FORMAT`، `INVALID` (کد اشتباه/منقضی یا کاربر یافت نشد)، `ATTEMPTS` (بیش از حد مجاز تلاش)، `NO_PLAYER`، `ALREADY_LINKED`، `PLAYER_TAKEN`.
+
+> سمت سرور بازی، دستور یکپارچهٔ **`/mclink verify <code>`** همین اندپوینت را صدا می‌زند و شکل کوتاه `/mclink <code>` هم (با `verify.allow-short-form: true`) همان کار را می‌کند.
 
 ---
 
@@ -385,7 +399,7 @@ curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
 | مسیر | معادل جدید | پارامترها |
 |---|---|---|
 | `POST /request-link` | `/link/request` | `player`, `email` |
-| `POST /verify-link` | `/link/verify` | `email`, `code` |
+| `POST /verify-link` | `/link/verify` | `email`, `code` (از ۱.۸.۰ `player`/`uuid` هم پذیرفته می‌شود) |
 | `GET /pending` | `/deliveries` | `player` |
 | `POST /mark-delivered` | `/deliveries/mark` | `id` |
 | – | `/deliveries/report` (۱.۷.۰) | `id`, `player`, `note` |
@@ -533,7 +547,7 @@ curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
   -d '{"player":"Notch","email":"user@example.com","channel":"email"}' "$BASE/link/request"
 curl -sS -X POST -H "X-BMC-Token: $TOKEN" -H "Content-Type: application/json" \
-  -d '{"player":"Notch","email":"user@example.com","code":"12345"}' "$BASE/link/verify"
+  -d '{"player":"Notch","uuid":"069a79f444e94726a5befca90e38aaf5","code":"12345"}' "$BASE/link/verify"
 
 # فهرست محصولات سایت
 curl -sS -H "X-BMC-Token: $TOKEN" "$BASE/products?limit=100"

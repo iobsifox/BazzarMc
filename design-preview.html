@@ -446,6 +446,83 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
 .ep-flex{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
 .ep-flex>div:first-child{flex:1 1 420px;min-width:280px}
 @media(max-width:640px){.qv__body{grid-template-columns:1fr}.shop-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+/* ---------- ۱.۸.۰ — منوی موبایل، کارت وابسته به بخش، به‌روزرسانی درجا ---------- */
+.dp-cols{display:grid;grid-template-columns:400px 1fr;gap:18px;align-items:start}
+@media (max-width:960px){.dp-cols{grid-template-columns:1fr}}
+.dp-phone{width:392px;max-width:100%;margin:0 auto;border:9px solid #0f172a;border-radius:34px;background:#0f172a;padding:8px;box-shadow:var(--sh)}
+.dp-phone__notch{width:92px;height:6px;border-radius:99px;background:#334155;margin:6px auto 10px}
+.dp-phone__screen{background:var(--bg);border-radius:24px;padding:14px 12px 18px;min-height:520px}
+.dp-urlbar{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:11px;color:var(--muted);margin-bottom:12px;direction:ltr}
+.dp-nav{--a:#16a34a;--as:#dcfce7}
+.dp-nav ul{list-style:none;display:flex;gap:8px;margin:0 0 14px;padding:0}
+.dp-nav li{margin:0;flex:0 0 auto}
+.dp-nav a{display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;white-space:nowrap}
+.dp-nav a .ico{width:16px;height:16px;color:var(--a)}
+.dp-nav li.on a{background:var(--as);border-color:var(--a);color:var(--green-d)}
+.dp-nav .cnt{background:var(--a);color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:0 6px;line-height:16px}
+.dp-nav--scroll ul{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.dp-nav--scroll ul::-webkit-scrollbar{display:none}
+.dp-nav--grid ul{flex-wrap:wrap}
+.dp-nav--grid li{flex:1 1 calc(33.333% - 6px);min-width:calc(33.333% - 6px)}
+.dp-nav--grid a{flex-direction:column;text-align:center;gap:4px;padding:10px 6px;font-size:11px}
+.dp-nav--icons ul{flex-wrap:wrap;justify-content:center}
+.dp-nav--icons li{max-width:64px;flex:1 1 auto}
+.dp-nav--icons a{flex-direction:column;text-align:center;gap:3px;padding:9px 4px;font-size:10px}
+.dp-nav--vertical ul{flex-direction:column}
+.dp-nav--vertical li{flex:none}
+.dp-nav--vertical a{width:100%;background:#fff;border-color:var(--line)}
+.dp-nav--collapse ul{flex-direction:column}
+.dp-nav--collapse li{flex:none}
+.dp-nav .dp-nav__sum{display:flex;align-items:center;gap:8px;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:12.5px;font-weight:800;cursor:pointer;margin-bottom:8px}
+.dp-nav .dp-nav__sum .ico{margin-inline-start:auto;transition:.18s}
+.dp-nav--collapse details[open] .dp-nav__sum{background:var(--as);border-color:var(--a)}
+.dp-nav--collapse details[open] .dp-nav__sum .chev{transform:rotate(180deg)}
+.dp-nav:not(.dp-nav--collapse) details>summary{display:none}
+.dp-nav:not(.dp-nav--collapse) details[open]>summary{display:none}
+.dp-nav .dp-nav__sel{display:none;width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13px;font-weight:700;margin-bottom:12px}
+.dp-nav--dropdown .dp-nav__sel{display:block}
+.dp-nav--dropdown ul{display:none}
+.dp-nav--dropdown details>summary{display:none}
+.dp-nav.nolabel a .lbl{display:none}
+.dp-nav.nolabel a{justify-content:center;padding:10px;gap:0}
+.dp-ctx{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:var(--sh)}
+.dp-ctx__top{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px dashed var(--line);margin-bottom:12px}
+.dp-ctx__av{width:42px;height:42px;border-radius:12px;background:var(--as);display:grid;place-items:center;color:var(--green-d);flex:none}
+.dp-ctx__k{font-size:11px;color:var(--muted)}
+.dp-ctx__n{font-size:15.5px;font-weight:800;line-height:1.5}
+.dp-ctx__lab{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;margin-bottom:10px}
+.dp-ctx__lab .ico{width:17px;height:17px;color:var(--green-d)}
+.dp-row{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:12px;margin-bottom:7px;font-size:12.5px;background:#fff}
+.dp-row .ico{width:16px;height:16px;color:var(--muted);flex:none}
+.dp-row .sp{margin-inline-start:auto;display:flex;align-items:center;gap:8px}
+.dp-badge{font-size:10.5px;font-weight:800;padding:1px 8px;border-radius:99px;white-space:nowrap}
+.dp-badge.ok{background:var(--green-l);color:var(--green-d)}
+.dp-badge.wa{background:var(--amber-l);color:var(--amber)}
+.dp-badge.bl{background:var(--blue-l);color:var(--blue)}
+.dp-badge.mt{background:#f1f5f9;color:var(--muted)}
+.dp-mini{font-size:11px;color:var(--muted)}
+.dp-btn{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;border:0;border-radius:10px;padding:8px 14px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+.dp-btn.gh{background:#fff;color:var(--green-d);border:1px solid var(--line)}
+.dp-hint{background:#f8fafc;border:1px dashed var(--line);border-radius:12px;padding:11px 12px;font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:flex-start}
+.dp-hint .ico{width:16px;height:16px;flex:none;color:var(--blue);margin-top:3px}
+.dp-seg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.dp-seg button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer}
+.dp-seg button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.dp-wp{background:#fff;border:1px solid #dcdcde;border-radius:6px;overflow:hidden;font-size:13px}
+.dp-wp__row{display:flex;gap:12px;padding:14px 16px}
+.dp-wp__cb{width:16px;height:16px;border:1px solid #8c8f94;border-radius:3px;flex:none;margin-top:3px}
+.dp-wp__t{font-weight:700;color:#2271b1}
+.dp-wp__d{color:#50575e;font-size:12.5px;margin-top:3px}
+.dp-wp__acts{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:#2271b1}
+.dp-wp__acts i{color:#dcdcde;font-style:normal}
+.dp-wp__upd{background:#f6f7f7;border-bottom:1px solid #f0f0f1;padding:12px 16px 12px 16px;display:flex;gap:10px;flex-wrap:wrap}
+.dp-wp__updb{background:#fff;border:1px solid #2271b1;border-radius:4px;padding:8px 12px;color:#2271b1;font-size:12.5px;font-weight:600;white-space:nowrap}
+.dp-wp__updn{font-size:12.5px;color:#50575e}
+.dp-wp__updn b{color:#1d2327}
+.dp-wp__btn{background:#2271b1;color:#fff;border:0;border-radius:4px;padding:7px 13px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
+.dp-wp__btn.sec{background:#f6f7f7;color:#2271b1;border:1px solid #2271b1}
+.dp-note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.9}
+.dp-note code{background:#f1f5f9;border-radius:6px;padding:1px 5px;font-size:11.5px}
 </style>
 </head>
 <body>
@@ -472,6 +549,7 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
     <button class="tab" role="tab" aria-selected="false" data-t="checkout"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> چک‌اوت اختصاصی</button>
     <button class="tab" role="tab" aria-selected="false" data-t="shop"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M841-518v318q0 33-23.5 56.5T761-120H201q-33 0-56.5-23.5T121-200v-318q-23-21-35.5-54t-.5-72l42-136q8-26 28.5-43t47.5-17h556q27 0 47 16.5t29 43.5l42 136q12 39-.5 71T841-518Zm-272-42q27 0 41-18.5t11-41.5l-22-140h-78v148q0 21 14 36.5t34 15.5Zm-180 0q23 0 37.5-15.5T441-612v-148h-78l-22 140q-4 24 10.5 42t37.5 18Zm-178 0q18 0 31.5-13t16.5-33l22-154h-78l-40 134q-6 20 6.5 43t41.5 23Zm540 0q29 0 42-23t6-43l-42-134h-76l22 154q3 20 16.5 33t31.5 13ZM201-200h560v-282q-5 2-6.5 2H751q-27 0-47.5-9T663-518q-18 18-41 28t-49 10q-27 0-50.5-10T481-518q-17 18-39.5 28T393-480q-29 0-52.5-10T299-518q-21 21-41.5 29.5T211-480h-4.5q-2.5 0-5.5-2v282Zm560 0H201h560Z"/></svg> ویترین و کارت محصول</button>
     <button class="tab" role="tab" aria-selected="false" data-t="account"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/></svg> کارت حساب کاربری</button>
+    <button class="tab" role="tab" aria-selected="false" data-t="mobile"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-120v40h400v-40H280Zm0-80h400v-480H280v480Zm0-560h400v-40H280v40Zm0 0v-40 40Zm0 640v40-40Z"/></svg> موبایل و کارت هوشمند</button>
     <button class="tab" role="tab" aria-selected="false" data-t="admin"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="m370-80-16-128q-13-5-24.5-12T307-235l-119 50L78-375l103-78q-1-7-1-13.5v-27q0-6.5 1-13.5L78-585l110-190 119 50q11-8 23-15t24-12l16-128h220l16 128q13 5 24.5 12t22.5 15l119-50 110 190-103 78q1 7 1 13.5v27q0 6.5-2 13.5l103 78-110 190-118-50q-11 8-23 15t-24 12L590-80H370Zm70-80h79l14-106q31-8 57.5-23.5T639-327l99 41 39-68-86-65q5-14 7-29.5t2-31.5q0-16-2-31.5t-7-29.5l86-65-39-68-99 42q-22-23-48.5-38.5T533-694l-13-106h-79l-14 106q-31 8-57.5 23.5T321-633l-99-41-39 68 86 64q-5 15-7 30t-2 32q0 16 2 31t7 30l-86 65 39 68 99-42q22 23 48.5 38.5T427-266l13 106Zm42-180q58 0 99-41t41-99q0-58-41-99t-99-41q-59 0-99.5 41T342-480q0 58 40.5 99t99.5 41Zm-2-140Z"/></svg> پنل مدیریت</button>
   </nav>
 
@@ -1091,6 +1169,96 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
     </div>
   </section>
 
+  <!-- ============ ۸) موبایل و کارت هوشمند (۱.۸.۰) ============ -->
+  <section class="panel" id="p-mobile">
+    <div class="card">
+      <div class="card-h">
+        <div>
+          <h2><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-120v40h400v-40H280Zm0-80h400v-480H280v480Zm0-560h400v-40H280v40Zm0 0v-40 40Zm0 640v40-40Z"/></svg> منوی حساب کاربری در موبایل و کارت وابسته به بخش</h2>
+          <div class="sub">سمت راست: قالب منو در عرض کمتر از «عرض شکست» (پیش‌فرض ۷۸۲px) • سمت چپ: کارت حساب کاربری بر اساس بخش فعال</div>
+        </div>
+        <span class="badge b-ok"><span class="dot"></span> جدید در ۱.۸.۰</span>
+      </div>
+      <div style="padding:20px 22px">
+        <div class="dp-cols">
+          <div>
+            <div class="dp-seg" data-nav-seg>
+              <button type="button" data-nav="scroll" aria-pressed="true">افقی لغزان</button>
+              <button type="button" data-nav="grid" aria-pressed="false">شبکه</button>
+              <button type="button" data-nav="icons" aria-pressed="false">آیکونی</button>
+              <button type="button" data-nav="dropdown" aria-pressed="false">فهرست کشویی</button>
+              <button type="button" data-nav="collapse" aria-pressed="false">جمع‌شونده</button>
+              <button type="button" data-nav="vertical" aria-pressed="false">عمودی</button>
+              <button type="button" data-nav="nolabel" aria-pressed="false">بدون برچسب</button>
+            </div>
+            <div class="dp-phone">
+              <div class="dp-phone__notch"></div>
+              <div class="dp-phone__screen">
+                <div class="dp-urlbar"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z"/></svg> mysite.com/my-account/bmc-tickets/</div>
+                <div class="dp-nav dp-nav--scroll" id="dpNav">
+                  <select class="dp-nav__sel" aria-label="منوی حساب کاربری">
+                    <option>داشبورد</option><option selected>تیکت پشتیبانی (۲)</option><option>سفارش‌ها</option><option>دانلودها</option><option>اتصال ماینکرافت</option><option>جزئیات حساب</option><option>خروج</option>
+                  </select>
+                  <details open>
+                    <summary class="dp-nav__sum"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm0-160q17 0 28.5-11.5T520-480q0-17-11.5-28.5T480-520q-17 0-28.5 11.5T440-480q0 17 11.5 28.5T480-440Zm0-160q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm320 440H160q-33 0-56.5-23.5T80-240v-160q33 0 56.5-23.5T160-480q0-33-23.5-56.5T80-560v-160q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v160q-33 0-56.5 23.5T800-480q0 33 23.5 56.5T880-400v160q0 33-23.5 56.5T800-160Zm0-80v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102h640ZM480-480Z"/></svg> تیکت پشتیبانی <span class="cnt">۲</span> <span class="chev"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg></span></summary>
+                    <ul><li><a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M520-600v-240h320v240H520ZM120-440v-400h320v400H120Zm400 320v-400h320v400H520Zm-400 0v-240h320v240H120Zm80-400h160v-240H200v240Zm400 320h160v-240H600v240Zm0-480h160v-80H600v80ZM200-200h160v-80H200v80Zm160-320Zm240-160Zm0 240ZM360-280Z"/></svg> <span class="lbl">داشبورد</span></a></li><li class="on"><a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm0-160q17 0 28.5-11.5T520-480q0-17-11.5-28.5T480-520q-17 0-28.5 11.5T440-480q0 17 11.5 28.5T480-440Zm0-160q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm320 440H160q-33 0-56.5-23.5T80-240v-160q33 0 56.5-23.5T160-480q0-33-23.5-56.5T80-560v-160q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v160q-33 0-56.5 23.5T800-480q0 33 23.5 56.5T880-400v160q0 33-23.5 56.5T800-160Zm0-80v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102h640ZM480-480Z"/></svg> <span class="lbl">تیکت پشتیبانی</span> <span class="cnt">۲</span></a></li><li><a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z"/></svg> <span class="lbl">سفارش‌ها</span></a></li><li><a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg> <span class="lbl">دانلودها</span></a></li><li><a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-120 80-600l120-240h560l120 240-400 480Zm-95-520h190l-60-120h-70l-60 120Zm55 347v-267H218l222 267Zm80 0 222-267H520v267Zm144-347h106l-60-120H604l60 120Zm-474 0h106l60-120H250l-60 120Z"/></svg> <span class="lbl">اتصال ماینکرافت</span></a></li><li><a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/></svg> <span class="lbl">جزئیات حساب</span></a></li><li><a href="#"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg> <span class="lbl">خروج</span></a></li></ul>
+                  </details>
+                </div>
+                <div class="dp-ctx" id="dpCtx"></div>
+              </div>
+            </div>
+            <div class="dp-note">چیدمان موبایل، «نمایش برچسب آیتم‌ها»، «منوی چسبان» و «عرض شکست» در <b>تأیید و حساب کاربری ← منوی حساب کاربری (موبایل)</b> تنظیم می‌شوند. در چیدمان <b>افقی لغزان</b> ردیف با انگشت کشیده می‌شود و آیتم فعال خودکار مرکز می‌آید (<code>bmc-nav.js</code>).</div>
+          </div>
+          <div>
+            <div class="dp-seg" data-ctx-seg>
+              <button type="button" data-ctx="tickets" aria-pressed="true">در صفحهٔ تیکت‌ها</button>
+              <button type="button" data-ctx="orders" aria-pressed="false">سفارش‌ها و دانلودها</button>
+              <button type="button" data-ctx="minecraft" aria-pressed="false">اتصال ماینکرافت</button>
+              <button type="button" data-ctx="profile" aria-pressed="false">جزئیات حساب</button>
+              <button type="button" data-ctx="dashboard" aria-pressed="false">داشبورد</button>
+            </div>
+            <div class="dp-ctx" id="dpCtxBig"></div>
+            <div class="dp-note">کارت دیگر ثابت نیست: <b>حالت کارت = خودکار (وابسته به بخش)</b> تشخیص می‌دهد کاربر در کدام بخش «حساب کاربری» است و محتوای همان بخش را نشان می‌دهد. هر بخش جدا خاموش‌شدنی است، «تعداد موارد فهرست» قابل تنظیم است و می‌توان کارت را خودکار بالای بخش‌های دلخواه درج کرد (فقط یک‌بار در هر صفحه). در ویجت المنتور/شورت‌کد هم می‌شود بخش را تحمیل کرد: <code>[bazzarmc_card context="tickets" box="no"]</code>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="card-h">
+        <div>
+          <h2><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-120q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q82 0 155.5 35T760-706v-94h80v240H600v-80h110q-41-56-101-88t-129-32q-117 0-198.5 81.5T200-480q0 117 81.5 198.5T480-200q105 0 183.5-68T756-440h82q-15 137-117.5 228.5T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/></svg> به‌روزرسانی درجا از صفحهٔ افزونه‌ها</h2>
+          <div class="sub">پیشخوان ← افزونه‌ها: میان‌بر «بررسی به‌روزرسانی BazzarMc» و نصب درجا بدون بارگذاری دستی zip</div>
+        </div>
+        <span class="badge b-bl"><span class="dot"></span> ۱.۸.۰</span>
+      </div>
+      <div style="padding:20px 22px">
+        <div class="dp-wp">
+          <div class="dp-wp__upd">
+            <div class="dp-wp__updb"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></svg> نسخهٔ جدید موجود است</div>
+            <div class="dp-wp__updn">
+              <b>BazzarMc ۱.۸.۰</b> در دسترس است.
+              <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+                <button class="dp-wp__btn"><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-120q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q82 0 155.5 35T760-706v-94h80v240H600v-80h110q-41-56-101-88t-129-32q-117 0-198.5 81.5T200-480q0 117 81.5 198.5T480-200q105 0 183.5-68T756-440h82q-15 137-117.5 228.5T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/></svg> اکنون به‌روزرسانی کن</button>
+                <button class="dp-wp__btn sec">مشاهدهٔ جزئیات ۱.۸.۰</button>
+              </div>
+            </div>
+          </div>
+          <div class="dp-wp__row">
+            <div class="dp-wp__cb"></div>
+            <div>
+              <div class="dp-wp__t">BazzarMc</div>
+              <div class="dp-wp__d">اتصال فروشگاه ووکامرس به سرور ماینکرافت — کد اتصال ۵ دقیقه‌ای، تحویل خودکار هر محصول، تیکت پشتیبانی، ویترین محصولات و به‌روزرسانی خودکار.</div>
+              <div class="dp-wp__acts">غیرفعال <i>|</i> تنظیمات <i>|</i> <b><svg class="ico" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true" focusable="false"><path d="M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"/></svg> بررسی به‌روزرسانی BazzarMc</b></div>
+              <div class="dp-wp__d" style="margin-top:6px;color:#787c82">نسخهٔ ۱.۷.۰ | توسط Obsifox Studio</div>
+            </div>
+          </div>
+        </div>
+        <div class="dp-note">با یک کلیک روی «بررسی به‌روزرسانی BazzarMc»: کش پاک می‌شود، آخرین ریلیز مخزن بررسی می‌گردد، <b>ردیف به‌روزرسانی همان لحظه ساخته می‌شود</b> و دکمهٔ «اکنون به‌روزرسانی کن» ظاهر می‌گردد؛ نتیجهٔ بررسی (موفق / ناموفق / خطای واقعی) هم به مدیر اعلام می‌شود. کلیدها در <b>ابزارها ← به‌روزرسانی افزونه</b>: «بررسی هنگام باز کردن صفحهٔ افزونه‌ها» و «نمایش میان‌بر در ردیف افزونه».</div>
+      </div>
+    </div>
+  </section>
+
   <section class="panel" id="p-admin">
     <div class="adm">
       <div class="side">
@@ -1179,14 +1347,14 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
   </section>
 
   <div class="foot">
-    BazzarMc ۱.۷.۰ &nbsp;•&nbsp; GPL-2.0-or-later &nbsp;•&nbsp; پیش‌نمایش طراحی (بدون دادهٔ واقعی)<br>
+    BazzarMc ۱.۸.۰ &nbsp;•&nbsp; GPL-2.0-or-later &nbsp;•&nbsp; پیش‌نمایش طراحی (بدون دادهٔ واقعی)<br>
     میان‌برها: <span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span> <span class="kbd">4</span> <span class="kbd">5</span> <span class="kbd">6</span> <span class="kbd">7</span> برای جابه‌جایی بین نماها
   </div>
 </div>
 
 <script>
 (function(){
-  var tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel'),keys=['link','tickets','gate','checkout','shop','account','admin'];
+  var tabs=document.querySelectorAll('.tab'),panels=document.querySelectorAll('.panel'),keys=['link','tickets','gate','checkout','shop','account','mobile','admin'];
   function show(t){
     tabs.forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.t===t));});
     panels.forEach(function(p){p.classList.toggle('active',p.id==='p-'+t);});
@@ -1334,6 +1502,41 @@ svg.ico { display: inline-block; width: 1em; height: 1em; vertical-align: -0.18e
       g.classList.add('sel');
     });
   });
+
+  /* منوی موبایل و کارت وابسته به بخش (۱.۸.۰) */
+  var dpNav=document.getElementById('dpNav');
+  var navSeg=document.querySelector('[data-nav-seg]');
+  if(dpNav&&navSeg){
+    navSeg.addEventListener('click',function(e){
+      var b=e.target.closest('button[data-nav]');
+      if(!b){return;}
+      var v=b.dataset.nav;
+      navSeg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+      if(v==='nolabel'){dpNav.classList.toggle('nolabel');return;}
+      dpNav.className='dp-nav dp-nav--'+v+(dpNav.classList.contains('nolabel')?' nolabel':'');
+    });
+  }
+  var ctxData={tickets:"<div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M280-240q-17 0-28.5-11.5T240-280v-80h520v-360h80q17 0 28.5 11.5T880-680v600L720-240H280ZM80-280v-560q0-17 11.5-28.5T120-880h520q17 0 28.5 11.5T680-840v360q0 17-11.5 28.5T640-440H240L80-280Zm520-240v-280H160v280h440Zm-440 0v-280 280Z\"/></svg> <b>\u062a\u06cc\u06a9\u062a #\u06f1\u06f2\u06f8\u06f4</b> \u2014 \u06a9\u0644\u06cc\u062f \u06a9\u0631\u06cc\u067e\u0631 \u062a\u062d\u0648\u06cc\u0644 \u0646\u0634\u062f <span class=\"sp\"><span class=\"dp-badge bl\">\u0628\u0627\u0632</span><span class=\"dp-mini\">\u06f1\u06f4\u06f0\u06f4/\u06f0\u06f6/\u06f2\u06f0</span></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h404q-4 20-4 40t4 40H160l320 200 146-91q14 13 30.5 22.5T691-572L480-440 160-640v400h640v-324q23-5 43-14t37-22v360q0 33-23.5 56.5T800-160H160Zm0-560v480-480Zm600 80q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35Z\"/></svg> <b>\u062a\u06cc\u06a9\u062a #\u06f1\u06f2\u06f7\u06f9</b> \u2014 \u062a\u0645\u062f\u06cc\u062f \u0631\u0646\u06a9 VIP <span class=\"sp\"><span class=\"dp-badge wa\">\u062f\u0631 \u0627\u0646\u062a\u0638\u0627\u0631 \u0634\u0645\u0627</span><span class=\"dp-mini\">\u06f1\u06f4\u06f0\u06f4/\u06f0\u06f6/\u06f1\u06f8</span></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M280-240q-17 0-28.5-11.5T240-280v-80h520v-360h80q17 0 28.5 11.5T880-680v600L720-240H280ZM80-280v-560q0-17 11.5-28.5T120-880h520q17 0 28.5 11.5T680-840v360q0 17-11.5 28.5T640-440H240L80-280Zm520-240v-280H160v280h440Zm-440 0v-280 280Z\"/></svg> <b>\u062a\u06cc\u06a9\u062a #\u06f1\u06f2\u06f6\u06f1</b> \u2014 \u0633\u0648\u0627\u0644 \u062f\u0631\u0628\u0627\u0631\u0647\u0654 \u06a9\u062f \u062e\u0631\u06cc\u062f <span class=\"sp\"><span class=\"dp-badge ok\">\u067e\u0627\u0633\u062e \u062f\u0627\u062f\u0647 \u0634\u062f</span><span class=\"dp-mini\">\u06f1\u06f4\u06f0\u06f4/\u06f0\u06f6/\u06f1\u06f2</span></span></div><div style=\"display:flex;gap:8px;margin-top:10px;align-items:center\"><button class=\"dp-btn\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z\"/></svg> \u062b\u0628\u062a \u062a\u06cc\u06a9\u062a \u062c\u062f\u06cc\u062f</button><span class=\"dp-mini\">\u06f2 \u062a\u06cc\u06a9\u062a \u0646\u06cc\u0627\u0632\u0645\u0646\u062f \u067e\u0627\u0633\u062e \u0634\u0645\u0627</span></div>",orders:"<div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z\"/></svg> <b>#\u06f2\u06f4\u06f8\u06f1</b> \u2014 \u06a9\u0644\u06cc\u062f \u06a9\u0631\u06cc\u067e\u0631 \u00d7\u06f1 <span class=\"sp\"><span class=\"dp-badge ok\">\u062a\u062d\u0648\u06cc\u0644 \u0634\u062f</span><span class=\"dp-mini\">\u06f1\u06f4\u06f0\u06f4/\u06f0\u06f6/\u06f2\u06f1</span></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z\"/></svg> <b>#\u06f2\u06f4\u06f5\u06f5</b> \u2014 \u0631\u0646\u06a9 VIP (\u06f3\u06f0 \u0631\u0648\u0632\u0647) <span class=\"sp\"><span class=\"dp-badge wa\">\u062f\u0631 \u0635\u0641 \u062a\u062d\u0648\u06cc\u0644</span><span class=\"dp-mini\">\u06a9\u062f BMC-7F2K</span></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M240-80q-50 0-85-35t-35-85v-120h120v-560l60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60 60 60 60-60v680q0 50-35 85t-85 35H240Zm480-80q17 0 28.5-11.5T760-200v-560H320v440h360v120q0 17 11.5 28.5T720-160ZM360-600v-80h240v80H360Zm0 120v-80h240v80H360Zm320-120q-17 0-28.5-11.5T640-640q0-17 11.5-28.5T680-680q17 0 28.5 11.5T720-640q0 17-11.5 28.5T680-600Zm0 120q-17 0-28.5-11.5T640-520q0-17 11.5-28.5T680-560q17 0 28.5 11.5T720-520q0 17-11.5 28.5T680-480ZM240-160h360v-80H200v40q0 17 11.5 28.5T240-160Zm-40 0v-80 80Z\"/></svg> <b>#\u06f2\u06f3\u06f9\u06f0</b> \u2014 \u0628\u0633\u062a\u0647\u0654 \u0627\u0644\u0645\u0627\u0633 \u06f6\u06f4 <span class=\"sp\"><span class=\"dp-badge mt\">\u062a\u06a9\u0645\u06cc\u0644 \u0634\u062f\u0647</span><span class=\"dp-mini\">\u06f1\u06f4\u06f0\u06f4/\u06f0\u06f5/\u06f2\u06f9</span></span></div><div class=\"dp-hint\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z\"/></svg> <span>\u0648\u0636\u0639\u06cc\u062a \u0647\u0631 \u062e\u0631\u06cc\u062f \u0627\u0632 \u0635\u0641 \u062a\u062d\u0648\u06cc\u0644 \u0627\u0641\u0632\u0648\u0646\u0647 \u062e\u0648\u0627\u0646\u062f\u0647 \u0645\u06cc\u200c\u0634\u0648\u062f\u061b \u062f\u0644\u06cc\u0644 \u062a\u062d\u0648\u06cc\u0644\u200c\u0646\u0634\u062f\u0646 \u0648 \u062e\u0644\u0627\u0635\u0647\u0654 \u067e\u0627\u062f\u0627\u0634 \u0647\u0645 \u0647\u0645\u06cc\u0646\u200c\u062c\u0627 \u0646\u0645\u0627\u06cc\u0634 \u062f\u0627\u062f\u0647 \u0645\u06cc\u200c\u0634\u0648\u062f.</span></div>",minecraft:"<div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M480-120 80-600l120-240h560l120 240-400 480Zm-95-520h190l-60-120h-70l-60 120Zm55 347v-267H218l222 267Zm80 0 222-267H520v267Zm144-347h106l-60-120H604l60 120Zm-474 0h106l60-120H250l-60 120Z\"/></svg> <b dir=\"ltr\">Notch_King</b> <span class=\"sp\"><span class=\"dp-badge ok\">\u0645\u062a\u0635\u0644</span><span class=\"dp-mini\">\u06f1\u06f4\u06f0\u06f4/\u06f0\u06f5/\u06f1\u06f2</span></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z\"/></svg> \u06f2 \u062e\u0631\u06cc\u062f \u062f\u0631 \u0635\u0641 \u062a\u062d\u0648\u06cc\u0644 <span class=\"sp\"><button class=\"dp-btn gh\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M160-280v80h640v-80H160Zm0-440h88q-5-9-6.5-19t-1.5-21q0-50 35-85t85-35q30 0 55.5 15.5T460-826l20 26 20-26q18-24 44-39t56-15q50 0 85 35t35 85q0 11-1.5 21t-6.5 19h88q33 0 56.5 23.5T880-640v440q0 33-23.5 56.5T800-120H160q-33 0-56.5-23.5T80-200v-440q0-33 23.5-56.5T160-720Zm0 320h640v-240H596l84 114-64 46-136-184-136 184-64-46 82-114H160v240Zm200-320q17 0 28.5-11.5T400-760q0-17-11.5-28.5T360-800q-17 0-28.5 11.5T320-760q0 17 11.5 28.5T360-720Zm240 0q17 0 28.5-11.5T640-760q0-17-11.5-28.5T600-800q-17 0-28.5 11.5T560-760q0 17 11.5 28.5T600-720Z\"/></svg> \u0645\u0646\u0648\u06cc \u062f\u0631\u06cc\u0627\u0641\u062a \u062f\u0631 \u0628\u0627\u0632\u06cc</button></span></div><div class=\"dp-hint\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z\"/></svg> <span>\u062f\u0633\u062a\u0648\u0631 \u0628\u0627\u0632\u06cc: <code dir=\"ltr\">/mclink verify &lt;code&gt;</code> \u2014 \u06cc\u06a9 \u062f\u0633\u062a\u0648\u0631 \u0628\u0631\u0627\u06cc \u06a9\u062f \u067e\u0646\u0644 \u0648 \u06a9\u062f \u0627\u06cc\u0645\u06cc\u0644.</span></div>",profile:"<div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z\"/></svg> \u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc <span class=\"sp\"><b dir=\"ltr\">amir_m</b></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z\"/></svg> \u0627\u06cc\u0645\u06cc\u0644 <span class=\"sp\"><b dir=\"ltr\">amir@example.com</b></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M280-40q-33 0-56.5-23.5T200-120v-720q0-33 23.5-56.5T280-920h400q33 0 56.5 23.5T760-840v720q0 33-23.5 56.5T680-40H280Zm0-120v40h400v-40H280Zm0-80h400v-480H280v480Zm0-560h400v-40H280v40Zm0 0v-40 40Zm0 640v40-40Z\"/></svg> \u0645\u0648\u0628\u0627\u06cc\u0644 <span class=\"sp\"><b dir=\"ltr\">\u06f0\u06f9\u06f1\u06f2\u06f3\u06f4\u06f5\u06f6\u06f7\u06f8\u06f9</b></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z\"/></svg> \u0639\u0636\u0648\u06cc\u062a <span class=\"sp\"><b>\u06f1\u06f4\u06f0\u06f3/\u06f1\u06f1/\u06f0\u06f4</b></span></div>",dashboard:"<div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M280-120v-80h160v-124q-49-11-87.5-41.5T296-442q-75-9-125.5-65.5T120-640v-40q0-33 23.5-56.5T200-760h80v-80h400v80h80q33 0 56.5 23.5T840-680v40q0 76-50.5 132.5T664-442q-18 46-56.5 76.5T520-324v124h160v80H280Zm0-408v-152h-80v40q0 38 22 68.5t58 43.5Zm200 128q50 0 85-35t35-85v-240H360v240q0 50 35 85t85 35Zm200-128q36-13 58-43.5t22-68.5v-40h-80v152Zm-200-52Z\"/></svg> <b>\u0631\u0646\u06a9 VIP</b> <span class=\"sp\"><span class=\"dp-badge ok\">\u06f2\u06f3 \u0631\u0648\u0632 \u0628\u0627\u0642\u06cc\u200c\u0645\u0627\u0646\u062f\u0647</span></span></div><div class=\"dp-row\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M160-280v80h640v-80H160Zm0-440h88q-5-9-6.5-19t-1.5-21q0-50 35-85t85-35q30 0 55.5 15.5T460-826l20 26 20-26q18-24 44-39t56-15q50 0 85 35t35 85q0 11-1.5 21t-6.5 19h88q33 0 56.5 23.5T880-640v440q0 33-23.5 56.5T800-120H160q-33 0-56.5-23.5T80-200v-440q0-33 23.5-56.5T160-720Zm0 320h640v-240H596l84 114-64 46-136-184-136 184-64-46 82-114H160v240Zm200-320q17 0 28.5-11.5T400-760q0-17-11.5-28.5T360-800q-17 0-28.5 11.5T320-760q0 17 11.5 28.5T360-720Zm240 0q17 0 28.5-11.5T640-760q0-17-11.5-28.5T600-800q-17 0-28.5 11.5T560-760q0 17 11.5 28.5T600-720Z\"/></svg> <b>\u06a9\u0644\u06cc\u062f \u06a9\u0631\u06cc\u067e\u0631</b> \u00d7\u06f3 <span class=\"sp\"><span class=\"dp-badge mt\">\u062a\u062d\u0648\u06cc\u0644 \u0634\u062f</span></span></div><div class=\"dp-hint\"><svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z\"/></svg> <span>\u062e\u0631\u06cc\u062f \u0686\u0646\u062f \u062f\u0648\u0631\u0647\u060c \u0627\u0639\u062a\u0628\u0627\u0631 \u0631\u0627 \u062a\u062c\u0645\u06cc\u0639 \u0645\u06cc\u200c\u06a9\u0646\u062f \u0648 \u0632\u0645\u0627\u0646 \u0628\u0627\u0642\u06cc\u200c\u0645\u0627\u0646\u062f\u0647\u0654 \u0647\u0631 \u062e\u0631\u06cc\u062f \u0646\u0645\u0627\u06cc\u0634 \u062f\u0627\u062f\u0647 \u0645\u06cc\u200c\u0634\u0648\u062f.</span></div>"};
+  var ctxTitle={tickets:'تیکت‌های پشتیبانی',orders:'سفارش‌ها و تحویل‌ها',minecraft:'اتصال ماینکرافت',profile:'جزئیات حساب',dashboard:'خریدهای شما'};
+  function dpCtxHtml(k){
+    return '<div class="dp-ctx__top"><div class="dp-ctx__av">'+"<svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z\"/></svg>"+'</div><div><div class="dp-ctx__k">حساب کاربری ← '+ctxTitle[k]+'</div><div class="dp-ctx__n">امیرحسین محمدی</div></div></div>'
+      +'<div class="dp-ctx__lab">'+"<svg class=\"ico\" viewBox=\"0 -960 960 960\" fill=\"currentColor\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm0-160q17 0 28.5-11.5T520-480q0-17-11.5-28.5T480-520q-17 0-28.5 11.5T440-480q0 17 11.5 28.5T480-440Zm0-160q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm320 440H160q-33 0-56.5-23.5T80-240v-160q33 0 56.5-23.5T160-480q0-33-23.5-56.5T80-560v-160q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v160q-33 0-56.5 23.5T800-480q0 33 23.5 56.5T880-400v160q0 33-23.5 56.5T800-160Zm0-80v-102q-37-22-58.5-58.5T720-480q0-43 21.5-79.5T800-618v-102H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102h640ZM480-480Z\"/></svg>"+' '+ctxTitle[k]+'</div>'+ctxData[k];
+  }
+  var big=document.getElementById('dpCtxBig');
+  var ctxSeg=document.querySelector('[data-ctx-seg]');
+  if(big){
+    if(ctxSeg){
+      ctxSeg.addEventListener('click',function(e){
+        var b=e.target.closest('button[data-ctx]');
+        if(!b){return;}
+        ctxSeg.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+        big.innerHTML=dpCtxHtml(b.dataset.ctx);
+      });
+    }
+    big.innerHTML=dpCtxHtml('tickets');
+  }
+  var small=document.getElementById('dpCtx');
+  if(small){small.innerHTML=dpCtxHtml('tickets');}
 
 })();
 </script>

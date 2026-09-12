@@ -4,14 +4,18 @@
 کد اتصال از پنل کاربری، اتصال با رمز یک‌بارمصرف ایمیلی از داخل بازی، تحویل خودکار آیتم‌ها/دستورها پس از پرداخت،
 **منوی دریافت آیتم با کد خرید (GUI)**، **تعریف و همگام‌سازی رنک‌ها با سایت** و **یادآوری آیتم‌های تحویل‌گرفته‌نشده**.
 
-* خروجی آماده: `../dist/BazzarMC-1.7.0.jar`
+* خروجی آماده: `../dist/BazzarMC-1.8.0.jar`
 * سازگاری: Spigot / Paper / Purpur — نسخهٔ **1.16 تا 1.21**
 * جاوا: بایت‌کد **Java 8** → روی سرورهای Java 8 تا Java 21 اجرا می‌شود
 * وابستگی‌ها: `spigot-api` و `gson` با scope=provided (jar نهایی سبک و بدون shade)
 * وابستگی اختیاری: **LuckPerms** — اگر نصب باشد، زمان انقضای واقعی گروه‌ها برای گزارش رنک خوانده می‌شود (بدون آن، از `plugins/BazzarMC/ranks.yml` استفاده می‌گردد)
 
-### چه چیزی در نسخهٔ ۱.۷.۰ عوض شده است؟
+### چه چیزی در نسخهٔ ۱.۸.۰ عوض شده است؟
 
+* **`config.yml` کاملاً انگلیسی** — همهٔ کلیدها، توضیح‌ها و پیام‌های پلاگین (به‌همراه `plugin.yml`) انگلیسی شدند تا فایل تنظیمات در هر سروری بدون مشکل انکودینگ خوانده و ویرایش شود. ساختار کلیدها نسبت به ۱.۷.۰ عوض نشده؛ پس تنظیم‌های قبلی را مستقیم می‌توانید منتقل کنید (فقط متن توضیح‌ها انگلیسی شده است).
+* **دستور یکپارچهٔ تأیید کد** — `/mclink verify <code>` یک دستور برای **همهٔ کدها** است؛ فرقی نمی‌کند کد از **ایمیل** آمده باشد یا از **پنل کاربری سایت**. شکل کوتاه `/mclink <code>` هم همان کار را می‌کند (`verify.allow-short-form: true`). دستور قدیمی `/mclink mail <email> <code>` هم برای سازگاری باقی مانده است.
+* **رفع مشکل درخواست کد ایمیل** — سمت وردپرس، ارسال ایمیل با هدرهای کامل (`From`/`Reply-To`/`Content-Type`)، کدگذاری MIME نام و موضوع فارسی، آدرس/نام فرستندهٔ قابل تنظیم و ثبت دلیل واقعی شکست در لاگ اصلاح شد؛ در حالت `verify.strict-mode: true` اگر کانال ایمیل خاموش باشد، به‌جای سکوت، خطای روشن برگردانده می‌شود.
+* **محصول لزوماً رنک نیست** — نمونهٔ آمادهٔ `config.yml` و متن‌های داخلی به‌صورت عمومی (آیتم، کیت، پول یا امتیاز درون‌بازی، کلید صندوقچه، دسترسی خاص، رنک یا دستورهای دلخواه) بازنویسی شد.
 * **موتور پاداش عمومی (`RewardEngine`)** — هر خرید می‌تواند هر ترکیبی از این پاداش‌ها را داشته باشد: آیتم، **رنک**، **امتیاز (`points`)**، **پول (`money`)**، **اعلان عمومی (`broadcast`)**، دستورهای کنسول و دستورهای سمت بازیکن.
 * **رنک حتی بدون تعریف محصول** — اگر کلید/نام/شناسهٔ محصول با یکی از رنک‌های `ranks.list` مطابقت کند، رنک با دستور `rewards.rank-command` اعطا می‌شود؛ حتی اگر در بخش `products` هیچ تعریفی نباشد (`rewards.unknown-rank: true`).
 * **ردیف‌ها دیگر بی‌دلیل در صف نمی‌مانند** — هر پاداشی که اعطا شود، با `delivery.mark-granted-as-delivered: true` ردیف «تحویل‌شده» علامت می‌خورد و آیتم کاغذی از منوی دریافت حذف می‌گردد.
@@ -26,7 +30,7 @@
 
 ```bash
 # ۱) کپی در پوشهٔ plugins
-cp ../dist/BazzarMC-1.7.0.jar /path/to/server/plugins/
+cp ../dist/BazzarMC-1.8.0.jar /path/to/server/plugins/
 
 # ۲) اجرای سرور (config.yml ساخته می‌شود)
 # ۳) ویرایش plugins/BazzarMC/config.yml
@@ -40,9 +44,11 @@ bmc syncranks      # ارسال تعریف رنک‌ها به سایت
 
 ```yaml
 api:
-  base-url: "https://yoursite.com"          # بدون اسلش انتهایی
-  token: "توکن از پنل وردپرس"               # پیشخوان ← BazzarMc ← اتصال سرور
+  base-url: "https://yoursite.com"    # no trailing slash
+  token: "TOKEN_FROM_WP_PANEL"        # WP Admin -> BazzarMc -> Server Connection
 ```
+
+> از نسخهٔ ۱.۸.۰ همهٔ توضیح‌های `config.yml` **انگلیسی** است. مقدارها (مثل آدرس سایت و توکن) همان‌طور که هستند نوشته می‌شوند و زبان آن‌ها مهم نیست؛ فقط بخش `products` ممکن است نام فارسی محصول شما را داشته باشد (تطبیق با نام محصول، نام‌محور هم هست).
 
 ---
 
@@ -54,9 +60,10 @@ api:
 
 | دستور | کار |
 |---|---|
-| `/mclink <کد>` | استفاده از کد ۵ دقیقه‌ای پنل کاربری سایت |
-| `/mclink mail <ایمیل>` | ارسال رمز از راه ایمیل |
-| `/mclink mail <ایمیل> <کد>` | تأیید رمز ایمیلی و اتصال |
+| `/mclink verify <code>` | **تأیید هر کدی** — کد پنل کاربری سایت یا رمز ایمیلی (جدید در ۱.۸.۰) |
+| `/mclink <code>` | شکل کوتاه همان دستور تأیید (قابل خاموش‌کردن با `verify.allow-short-form`) |
+| `/mclink mail <email>` | ارسال رمز از راه ایمیل |
+| `/mclink mail <email> <code>` | تأیید رمز ایمیلی و اتصال (سازگار با نسخهٔ قدیمی) |
 | `/mclink status` | وضعیت اتصال + تعداد آیتم‌های در انتظار |
 | `/mclink claim` | دریافت خودکار همهٔ آیتم‌های در انتظار در اینونتوری |
 | `/mclink gui` | **منوی دریافت آیتم‌ها** — هر خرید یک کاغذ با نام «کد خرید» است و با کلیک تحویل می‌گیرد |
@@ -87,92 +94,110 @@ api:
 
 ## تنظیمات
 
+> از نسخهٔ **۱.۸.۰** فایل `config.yml` کاملاً **انگلیسی** است (کلیدها، توضیح‌ها و پیام‌های پیش‌فرض).
+> ساختار کلیدها نسبت به ۱.۷.۰ تغییر نکرده؛ بنابراین مقدارهای فایل قبلی را می‌توانید مستقیم منتقل کنید.
+> متن پیام‌ها (`&a...`) و نام‌های محصول را می‌توانید فارسی بنویسید — فقط **کلیدها و توضیح‌ها** انگلیسی‌اند.
+
 ```yaml
 api:
-  base-url: "https://yoursite.com"
-  token: "CHANGE_ME"
-  endpoint: "/wp-json/bazzarmc/v1"   # معمولاً تغییر نمی‌کند
+  base-url: "https://yoursite.com"       # no trailing slash
+  token: "CHANGE_ME"                     # WP Admin -> BazzarMc -> Server Connection
+  endpoint: "/wp-json/bazzarmc/v1"       # normally no need to change
   timeout-seconds: 10
-  verify-ssl: true                   # false = قبول گواهی خودامضا (هماهنگ با ssl_verify در پنل وردپرس)
+  verify-ssl: true                       # false = accept self-signed certificate (matches ssl_verify in WP)
 
 store:
-  name: "فروشگاه من"                  # متغیر {store}
-  url: ""                            # متغیر {store_url} — خالی = همان api.base-url
-  ip: ""                             # متغیر {ip} — خالی = تشخیص خودکار از server.properties
-  server-name: ""                    # متغیر {server}
+  name: "My Store"                       # {store}
+  url: ""                                # {store_url} - empty means the same as api.base-url
+  ip: ""                                 # {ip} - empty means auto-detect from server.properties
+  server-name: ""                        # {server}
 
 command:
-  name: "mclink"                     # نام دستور بازیکن (دلخواه مدیر)
+  name: "mclink"                         # player command name (fully customizable)
   aliases: [bazzar, storelink, slink, link]
-  admin-name: "bmc"                  # نام دستور مدیر (دلخواه مدیر)
+  admin-name: "bmc"                      # admin command name
   admin-aliases: [bazzarmcadmin, bmcadmin]
 
+verify:                                  # NEW in 1.8.0 - one command for every code
+  strict-mode: true                      # true = clear error when the requested channel is disabled
+  allow-short-form: true                 # /mclink <code> works like /mclink verify <code>
+  accept-email-codes: true               # /mclink verify also accepts emailed one-time codes
+
 link:
-  broadcast: true                       # اعلام اتصال در چت عمومی
-  broadcast-message: "&a» &f{player} &7اکانت خود را به سایت متصل کرد!"
-  request-cooldown: 60                  # فاصلهٔ بین دو درخواست کد (ثانیه)
+  broadcast: true                        # announce the link in the public chat
+  broadcast-message: "&a{player} &7linked their account to the store!"
+  request-cooldown: 60                   # seconds between two code requests
 
 delivery:
   enabled: true
-  poll-seconds: 45                      # بررسی دوره‌ای بازیکنان آنلاین
-  on-join: true                         # بررسی هنگام ورود
-  join-delay-seconds: 5                 # تأخیر پس از ورود تا لود شدن کامل
-  unknown-product-commands: []          # دستورهای جایگزین برای محصول تعریف‌نشده
-  unknown-product-message: "…"
-  mark-unknown-as-delivered: false      # false = در صف می‌ماند تا مدیر رسیدگی کند
-  success-message: "&aآیتم &f{product} &aبا کد خرید &f{code} &aتحویل داده شد."   # پیام عمومی پس از هر تحویل موفق (خالی = بدون پیام)
+  poll-seconds: 45                       # periodic check for online players
+  on-join: true                          # check when a player joins
+  join-delay-seconds: 5                  # delay after join until the player is fully loaded
+  unknown-product-commands: []           # fallback commands for a product not defined here
+  unknown-product-message: "&eYour purchase &f{product} &eis not defined on the server yet. An admin was notified."
+  mark-granted-as-delivered: true        # mark the row delivered once any reward was granted
+  mark-unknown-as-delivered: false       # false = keep it in the queue for the admin
+  report-to-site: true                   # send the delivery reason/attempts back to the site
+  success-message: "&a{product} was delivered with purchase code &f{code}&a."
+
+rewards:                                 # global reward commands (overridable per product)
+  rank-command: "lp user {player} parent add {rank_role}"
+  rank-temp-command: "lp user {player} parent addtemp {rank_role} {rank_days}d accumulate"
+  points-command: "points give {player} {points}"
+  money-command: "eco give {player} {money}"
+  broadcast-command: ""                  # empty = plain Bukkit broadcast
+  unknown-rank: true                     # grant a rank matched from ranks.list even without a products entry
+  log-to-console: true
 
 ranks:
   enabled: true
-  sync-to-site: true                    # ارسال تعریف رنک‌ها و گزارش زمان باقی‌مانده به وردپرس
-  sync-interval-minutes: 60             # فاصلهٔ ارسال تعریف رنک‌ها
-  report-interval-minutes: 60           # فاصلهٔ ارسال زمان باقی‌ماندهٔ رنک بازیکنان آنلاین
-  prevent-downgrade: true               # جلوگیری از تحویل رنک پایین‌تر به دارندهٔ رنک بالاتر
-  downgrade-blocked-message: "&cشما رنک بالاتری دارید؛ این آیتم تحویل داده نمی‌شود."
-  list:                                 # منبع اصلی تعریف رنک (همین‌جا، نه سایت)
-    vip:                                # کلید = کلید محصول در بخش products یا شناسهٔ تحویل پنل
-      name: "رتبهٔ VIP"
-      level: 1                          # عدد بزرگ‌تر = رنک بالاتر
-      role: "vip"                       # نام گروه در LuckPerms
-      days: 30                          # 0 = دائمی
-    vip+:
-      name: "رتبهٔ VIP+"
-      level: 2
-      role: "vipplus"
-      days: 30
+  sync-to-site: true                     # send rank definitions and remaining time to WordPress
+  sync-interval-minutes: 60              # how often definitions are sent
+  report-interval-minutes: 60            # how often remaining time of online players is sent
+  prevent-downgrade: true                # do not deliver a lower rank to a higher-rank owner
+  downgrade-blocked-message: "&cYou already hold a higher rank; this item is not delivered."
+  list:                                  # the single source of rank definitions (here, not the site)
+    vip:                                 # key = product key in products: or the WP delivery id
+      name: "VIP"
+      level: 1                           # higher number = higher rank
+      role: "vip"                        # LuckPerms group name
+      days: 30                           # 0 = permanent
     legend:
-      name: "رتبهٔ لجند"
+      name: "Legend"
       level: 3
       role: "legend"
       days: 0
 
 gui:
   enabled: true
-  title: "&8&lآیتم‌های خریداری‌شدهٔ شما"
-  size: 54                              # 18 تا 54 (مضرب ۹)
-  code-material: PAPER                  # آیتم کد خرید
-  item-name: "&e&lکد خرید: &f{code}"     # نام آیتم = کد خرید
+  title: "&8&lYour purchases"
+  size: 54                               # 18 to 54 (multiple of 9)
+  code-material: PAPER                   # the purchase-code item
+  item-name: "&e&lPurchase code: &f{code}"
   item-lore:
-    - "&7محصول: &f{product}"
-    - "&7آیتم: &f{item} &7×&f{amount}"
-    - "&7شمارهٔ سفارش: &f{order_number}"
-    - "&8&m――――――――――――――――――――"
-    - "&aبرای دریافت، روی همین آیتم کلیک کنید."
+    - "&7Product: &f{product}"
+    - "&7Item: &f{item} &7x&f{amount}"
+    - "&7Order: &f{order_number}"
+    - "&aClick this item to claim it."
   filler-material: BLACK_STAINED_GLASS_PANE
   previous-material: ARROW
   next-material: ARROW
   refresh-material: COMPARATOR
   page-material: BOOK
   close-material: BARRIER
-  reminder-enabled: true                # یادآوری آیتم‌های تحویل‌گرفته‌نشده
+  reminder-enabled: true                 # remind about unclaimed items
   reminder-interval-seconds: 300
-  reminder-message: "&eشما &f{count} &eآیتم تحویل‌گرفته‌نشده در &f{store} &eدارید (کد &f{code}&e). برای دریافت: &f{gui_cmd}"
-  remind-when-blocked: true             # یادآوری وقتی اینونتوری پر است
+  reminder-message: "&eYou have &f{count} &eunclaimed item(s) in &f{store} &e(code &f{code}&e). To claim: &f{gui_cmd}"
+  remind-when-blocked: true              # remind when the inventory is full
 ```
 
 ---
 
 ## تعریف محصولات
+
+> **محصول لزوماً رنک نیست.** هر چیزی که در فروشگاه می‌فروشید می‌تواند یک محصول باشد: آیتم یا کیت درون‌بازی، پول یا امتیاز، کلید صندوقچه، دسترسی خاص، رنک، یا مجموعه‌ای از دستورهای کنسول.
+> در `config.yml` فقط تعیین می‌کنید **پاداش** آن خرید چیست (کلیدهای `material`/`amount`/`name`/`lore`/`commands`/`player-commands`/`points`/`money`/`broadcast`/`rank`)؛
+> اگر محصول شما رنک نیست، کلید `rank` را ننویسید و پاداش دلخواهتان را تعریف کنید.
 
 کلید هر محصول در `config.yml` با «شناسهٔ تحویل» محصول در پنل وردپرس (تب *محصولات و نقش‌ها*) مطابقت داده می‌شود.
 تطبیق به این ترتیب انجام می‌شود (اولین موردِ منطبق، برنده است):
@@ -190,6 +215,14 @@ gui:
 
 ```yaml
 products:
+  # 0) a non-rank product: in-game money + a crate key (no "rank" key at all)
+  "gold pack":
+    money: 25000
+    material: TRIPWIRE_HOOK
+    amount: 1
+    name: "&6Crate Key"
+    message: "&625000 coins and a crate key were added to your account."
+
   # ۱) فقط دستور کنسول (مثلاً LuckPerms)
   "vip":
     message: "&a&lرتبهٔ VIP &7برای شما فعال شد!"
@@ -408,7 +441,7 @@ message: "&#00ff88متن سبز نئونی!"
 
 ```bash
 mvn clean package
-# → target/BazzarMC-1.7.0.jar
+# → target/BazzarMC-1.8.0.jar
 ```
 
 با JDK/Maven دانلودشده در مسیر دیگر:
@@ -458,6 +491,8 @@ src/main/
 | ردیف‌ها در صف گیر کرده‌اند | تب *تحویل‌ها* ← فیلتر **«گیرکرده»** (ردیف‌های در انتظار با تلاش ناموفق یا قدیمی‌تر از آستانهٔ پنل). پس از اصلاح `config.yml`، `bmc reload` بزنید و بازیکن دوباره `/mclink claim` یا کلیک در منو را انجام دهد؛ در پنل هم دکمهٔ «پاک‌کردن گزارش» شمار تلاش را صفر می‌کند. |
 | رنک داده می‌شود ولی در صف می‌ماند | `delivery.mark-granted-as-delivered: false` یا `products.<key>.mark-delivered: false` است. |
 | خلاصهٔ پاداش در پنل دیده نمی‌شود | افزونهٔ وردپرس باید ۱.۷.۰ یا بالاتر باشد (ستون `note` و `attempts` در همان نسخه اضافه شد). |
+| `/mclink verify` شناخته نمی‌شود | jar باید نسخهٔ ۱.۸.۰ یا بالاتر باشد؛ پس از جایگزینی jar سرور را رستارت کنید یا `bmc reload` بزنید. |
+| توضیح‌های `config.yml` هنوز فارسی است | فایل تنظیمات در نخستین اجرا ساخته می‌شود؛ برای گرفتن نسخهٔ انگلیسی ۱.۸.۰، از `plugins/BazzarMC/config.yml` پشتیبان بگیرید، آن را حذف کنید و سرور را رستارت کنید (یا `bmc defaults` را اجرا کنید) و سپس مقدارهای خود را برگردانید. |
 | منوی GUI خالی باز می‌شود و بسته می‌شود | بازیکن آیتم تحویل‌گرفته‌نشده ندارد (`/bmc deliveries <بازیکن>`) یا `gui.enabled: false` است. |
 | رنک‌ها در پنل وردپرس دیده نمی‌شوند | `ranks.list` خالی است یا `ranks.sync-to-site: false`؛ یک‌بار `bmc syncranks` بزنید و تب *محصولات و نقش‌ها* را ببینید. |
 | زمان باقی‌ماندهٔ رنک در سایت به‌روز نمی‌شود | بازیکن باید آنلاین باشد تا گزارش شود (`ranks.report-interval-minutes`)؛ برای تست `bmc report <بازیکن>`. در لاگ سایت (تب ابزارها) رویداد `rank` ثبت می‌شود. |
