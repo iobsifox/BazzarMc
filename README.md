@@ -24,15 +24,9 @@ The implementation source is maintained privately. This public repository contai
 
 ## Code composition
 
-Percentages are calculated from the tracked files in the private product source repository using GitHub language statistics.
+Percentages are calculated from the tracked product source using GitHub language statistics.
 
-| Language | Percentage |
-| --- | ---: |
-| PHP | 61.2% |
-| Java | 16.5% |
-| CSS | 13.1% |
-| JavaScript | 5.0% |
-| HTML | 4.2% |
+![Code language composition](language-composition.svg)
 
 ---
 
